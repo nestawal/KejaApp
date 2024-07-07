@@ -1,15 +1,15 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Signup from "./signup.jsx"
+import { BrowserRouter as Router, Routes,Route ,Navigate } from 'react-router-dom';
+import Signup from "./signUp.jsx"
 import App from './App.jsx';
 
 export default function ARoutes() {
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
         <Route index element={<Signup />} />
         <Route path="/main" element={<App />} />
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
 
