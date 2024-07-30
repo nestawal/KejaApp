@@ -6,7 +6,7 @@ export default function ARoutes() {
   return (
     <Router>
       <Routes>
-        <Route index element={<Signup />} />
+        <Route path='/Sign' index element={<Signup />} />
         <Route path="/main" element={<App />} />
       </Routes>
     </Router>

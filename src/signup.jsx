@@ -26,9 +26,10 @@ export  default function Signup(){
     signinBtn.onclick = function(){
     nameField.style.maxHeight = "0";
     title.innerHTML = "Sign In";
-    signupBtn.classNameList.add("disable");
-    signinBtn.classNameList.remove("disable");
-  };};
+    signupBtn.classList.add("disable");
+    signinBtn.classList.remove("disable");
+  }
+};
 
   window.onload=function(){
     signupBtn.onclick = function(){
@@ -37,7 +38,7 @@ export  default function Signup(){
     signupBtn.classList.remove("disable");
     signinBtn.classList.add("disable");
     
-  };
+  }
 };
 
 
@@ -67,7 +68,7 @@ export  default function Signup(){
                     <button type="button" id="signupBtn" onClick={() => {
                       setGoMain(true)
                     }} >Sign Up</button>
-                    <button type="button" id="signinBtn" className="disable">Sign in</button>
+                    <button type="button" id="signinBtn" className="disable"  >Sign in</button>
                     
                 </div>
                 </form>

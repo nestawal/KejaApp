@@ -1,4 +1,4 @@
-import React from "react"
+import React,{useState} from "react"
 
 const Card =(props) => {
     let badgeText
@@ -7,6 +7,11 @@ const Card =(props) => {
     } else if (props.location === "Online") {
         badgeText = "ONLINE"
     }
+const [isListed,setListed] = useState(false)
+function weka(){
+    setListed(prevState => !prevState)
+}
+
     
     return (
         <div className="card">
@@ -28,7 +33,9 @@ const Card =(props) => {
             <p className="card--price">
                 <span className="bold">From ${props.price}</span> / person
             </p>
-            <button>Book</button>
+            
+            <button onClick={weka}>{isListed ? "Listed":"List"}</button>
+            
         </div>
     )
 }
