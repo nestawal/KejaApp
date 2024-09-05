@@ -6,7 +6,7 @@ export default function Navbar() {
     const [goSign, setGoSign] = React.useState(false);
 
     if(goSign){
-      return <Navigate to="/sign" />;
+      return <Navigate to="/" />;
     }
     function SignUpButton(){
         setGoSign(prevState => !prevState)
