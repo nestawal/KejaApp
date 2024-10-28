@@ -1,8 +1,9 @@
 import React from "react";
-import { Navigate } from 'react-router-dom';
+import { Navigate,useNavigate } from 'react-router-dom';
 
 
 export default function Navbar() {
+    const navigate = useNavigate()
     const [goSign, setGoSign] = React.useState(false);
 
     if(goSign){
@@ -10,6 +11,10 @@ export default function Navbar() {
     }
     function SignUpButton(){
         setGoSign(prevState => !prevState)
+    }
+
+    function goCart(){
+        navigate("/cart")
     }
   
     return (
@@ -20,6 +25,9 @@ export default function Navbar() {
             </div>
             <div>
                 <button onClick={SignUpButton}>SignUp</button>
+                <button onClick={goCart}>
+                <img src="/src/images/cart-logo.png"  className="nav--logo"  />
+                </button>
             </div>
         </nav>
     )
