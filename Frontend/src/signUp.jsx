@@ -31,7 +31,7 @@ function handleSubmit(e){
     password: formData.password
   })
   .then(result=>{console.log(result)
-    navigate("/main",{state: {formData}})
+    navigate("/",{state: {formData}})
   })
   .catch(error=>console.log(error))
 

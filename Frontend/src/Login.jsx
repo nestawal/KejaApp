@@ -36,9 +36,9 @@ function handleSubmit(event){
   .then(result=>{
     console.log(result)
     if(result.data === "found"){
-      navigate("/main")
-    }else{
       navigate("/")
+    }else{
+      navigate("/signUp")
       alert("please register, account not found")
     }
   })

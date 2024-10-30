@@ -9,9 +9,9 @@ export default function ARoutes() {
   return (
     <Router>
       <Routes>
-        <Route path='/'  element={<Signup />} />
+        <Route path='/'  element={<App />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/main" element={<App />} />
+        <Route path="/signUp" element={<Signup />} />
         <Route path="/cart" element={<Cart />}/>
       </Routes>
     </Router>
