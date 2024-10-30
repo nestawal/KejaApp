@@ -29,9 +29,24 @@ nav {
   width: 75px;
   height: 50px;
 }
+.nav--cart {
+  width: 75px;
+  height: 50px;
+  border-width: 0cap;
+  padding: 5px;
+
+  margin-bottom: 7px;
+}
 .navBrand{
   align-items: center;
   display: flex;
+  
+}
+.navFunctions{
+  width: 15%;
+  align-items: center;
+  display: flex;
+ justify-content: space-between;
 }
 
 .title{

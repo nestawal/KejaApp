@@ -10,7 +10,10 @@ const Card =(props) => {
 const [isListed,setListed] = useState(false)
 function weka(){
     setListed(prevState => !prevState)
-}
+    if(!isListed){
+        props.cart();
+    }
+} 
 
     
     return (
