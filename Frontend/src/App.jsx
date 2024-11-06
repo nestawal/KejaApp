@@ -10,7 +10,7 @@ export default function App() {
     const {formData} = location.state || {};
 
     function goCart(){
-        navigate("/cart")
+        navigate("/cart",{state:{cart}})
     }
 /**
  * idea=hapa nataka ku  take every item that is selected nieke kwa array
@@ -20,10 +20,10 @@ export default function App() {
     //console.log(isListed)
     const[cart,setCart]= useState([])
     function handleCart(newItem){
-            setCart(prev=>({
+            setCart(prev=>[
                 ...prev,
                 newItem
-            }))
+            ])
         
     }
     console.log(cart);
