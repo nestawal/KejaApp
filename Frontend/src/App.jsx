@@ -1,4 +1,4 @@
-import {React,useState} from "react"
+import {React,useState,useEffect} from "react"
 import Navbar from "./components/Navbar.jsx"
 import Card from "./components/Card.jsx"
 import data from "./data.js"
@@ -24,15 +24,7 @@ export default function App() {
         
     }
     console.log(cart);
-    const cards = data.map(item => {
-        return (
-            <Card
-                key={item.id}
-                {...item}
-                cart={()=>handleCart(item)}
-            />
-        )
-    })
+   
     //search functionality
     const [search,setSearch] = useState({
         title:"",
@@ -47,16 +39,53 @@ export default function App() {
             }
         })
     }
+    //filter search function
+    const [filtered,setFiltered] = useState([])
+    function filterCards(){
+            if(search.title==""&&search.location==""){
+                setFiltered(data)
+            }else{
+                const filteredData = data.filter(item => 
+                    item.title === search.title || item.location === search.location ); 
+                setFiltered(filteredData);
+            }
+    }
+    console.log(filtered)
+
     console.log(search)
     const [render,setRender] = useState(false)    
     function renderSearch(){
         setRender(prev=>!prev)
     }
+
+    const filCards = filtered.map(item => {
+        return (
+            <Card
+                key={item.id}
+                {...item}
+                cart={()=>handleCart(item)}
+            />
+        )
+    })
+
+    const unFil = data.map(item => {
+        return (
+            <Card
+                key={item.id}
+                {...item}
+                cart={()=>handleCart(item)}
+            />
+        )
+    })
+
+    const cards = filtered.length===0 ? unFil : filCards ;
+    
     return (
         <div>
             {render && <Search
                 content={search}
                 writeSearch={writeSearch}
+                filter={filterCards}
             />}
             <Navbar 
             fullName={formData ? formData.name : "Guest"} 

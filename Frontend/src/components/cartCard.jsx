@@ -35,7 +35,7 @@ function weka(){
             </div>
             <p className="card--title">{props.title}</p>
             <p className="card--price">
-                <span className="bold">From ${props.price}</span> / person
+                <span className="bold">From ksh {props.price}</span> / person
             </p>
             
             <button onClick={weka}>Rent</button>

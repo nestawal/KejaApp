@@ -4,7 +4,7 @@ export default function Search(prop){
    
     return(
         <div>
-            <form className='searchbar'>
+            <div className='searchbar'>
                 <input
                 name="title"
                 placeholder="title"
@@ -19,13 +19,13 @@ export default function Search(prop){
                 className="search"
                 value={prop.content.location} 
                 />
-                <button>
+                <button onClick={prop.filter}>
                     O
                 </button>
                 <button>
                     X
                 </button>
-            </form>
+            </div>
         </div>
     )
 }
