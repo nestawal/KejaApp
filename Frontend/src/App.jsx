@@ -14,6 +14,10 @@ export default function App() {
         navigate("/cart",{state:{cart}})
     }
 
+    function goPost(){
+        navigate("/posts")
+    }
+
     //console.log(isListed)
     const[cart,setCart]= useState([])
     function handleCart(newItem){
@@ -26,6 +30,7 @@ export default function App() {
     console.log(cart);
    
     //search functionality
+    //search functionality
     const [search,setSearch] = useState({
         title:"",
         location:""
@@ -37,6 +42,7 @@ export default function App() {
                 ...prev,
                 [e.target.name] : e.target.value
             }
+        filterCards();
         })
     }
     //filter search function
@@ -46,7 +52,8 @@ export default function App() {
                 setFiltered(data)
             }else{
                 const filteredData = data.filter(item => 
-                    item.title === search.title || item.location === search.location ); 
+                    item.title.toLowerCase() === search.title.toLowerCase() || 
+                    item.location.toLowerCase() === search.location.toLowerCase() ); 
                 setFiltered(filteredData);
             }
     }
@@ -78,7 +85,7 @@ export default function App() {
         )
     })
 
-    const cards = filtered.length===0 ? unFil : filCards ;
+    const cards = filtered.length === 0 ? unFil : filCards ;
     
     return (
         <div>
@@ -91,6 +98,7 @@ export default function App() {
             fullName={formData ? formData.name : "Guest"} 
             cart={goCart}
             render={renderSearch}
+            post={goPost}
             />
             
             <section className="cards-list">

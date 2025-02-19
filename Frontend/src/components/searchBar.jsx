@@ -20,7 +20,7 @@ export default function Search(prop){
                 value={prop.content.location} 
                 />
                 <button onClick={prop.filter}>
-                    O
+                  <img src="/src/images/search.png" alt="search" className='searchImg' />
                 </button>
                 <button>
                     X
