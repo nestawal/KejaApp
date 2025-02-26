@@ -5,31 +5,12 @@ const cors = require("cors");
 const app = express();
 app.use(express.json());
 app.use(cors({origin :'http://localhost:5173'}));
-const Identitymodel = require('./identity.model.js');
+const bodyParser = require("body-parser");
 const Database = require('./database.js');
-
-app.post("/signup",(req,res)=>{
-    Identitymodel.create(req.body)
-    .then(Identity => res.json(Identity))
-    .catch(err => res.json(err))
-});
-
-app.post("/login",(req,res)=>{
-    const{email,password}= req.body
-    Identitymodel.findOne({email: email})
-    .then(person=>{
-       if(user){
-        if(person.password === password){
-            res.json("found")
-        }else{
-            res.json("wrong password")
-        }
-       }else{
-        res.json("nowhere to be found")
-       }
-    })
-});
-
+const identityRoute = require("C:/Users/USER/kejaApp/Backend/routes/identityRoute.js");
+const postRoute = require("C:/Users/USER/kejaApp/Backend/routes/postRoute.js");
+app.use('/identities',identityRoute)
+app.use("/Post",postRoute)
 
 mongoose.connect(Database)
     .then(()=>{
