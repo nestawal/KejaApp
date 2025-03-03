@@ -8,7 +8,7 @@ const PostSchema = mongoose.Schema(
         },
         title : String,
         description : String,
-        rooms : String,
+        rooms : Number,
         location : String,
         price : Number,
         Email : String

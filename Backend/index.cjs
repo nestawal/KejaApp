@@ -9,6 +9,8 @@ const bodyParser = require("body-parser");
 const Database = require('./database.js');
 const identityRoute = require("C:/Users/USER/kejaApp/Backend/routes/identityRoute.js");
 const postRoute = require("C:/Users/USER/kejaApp/Backend/routes/postRoute.js");
+
+
 app.use('/identities',identityRoute)
 app.use("/Post",postRoute)
 

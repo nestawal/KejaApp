@@ -14,7 +14,7 @@ const createPost = (req,res)=>{
         price: req.body.price,
         rooms: req.body.rooms,
         image : {
-            data: fs.readFileSync(path.join(__dirname+"/uploads"+req.file.filename)),
+            data: fs.readFileSync(path.join(__dirname,"/uploads",req.file.filename)),
             contentType : "image/png"
         }
     }
