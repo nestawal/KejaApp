@@ -2,16 +2,12 @@ const mongoose = require("mongoose")
 
 const PostSchema = mongoose.Schema(
     {
-        image:{
-            data : Buffer,
-            contentType : String
-        },
-        title : String,
-        description : String,
-        rooms : Number,
-        location : String,
-        price : Number,
-        Email : String
+        email: String,
+        name: String,
+        description: String,
+        price: Number,
+        rooms: Number,
+        imageId: mongoose.Schema.Types.ObjectId
     },
     {
         timestamps: true
