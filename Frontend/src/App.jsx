@@ -10,12 +10,16 @@ export default function App() {
     const location = useLocation();
     const {formData} = location.state || {};
 
+    function goSign(){
+        navigate("/signUp")
+    }
+
     function goCart(){
         navigate("/cart",{state:{cart}})
     }
 
     function goPost(){
-        navigate("/posts")
+        navigate("/posts",{state:{posts}})
     }
 
     //console.log(isListed)
@@ -42,8 +46,9 @@ export default function App() {
                 ...prev,
                 [e.target.name] : e.target.value
             }
-        filterCards();
+        
         })
+        filterCards();
     }
     //filter search function
     const [filtered,setFiltered] = useState([])
@@ -96,6 +101,7 @@ export default function App() {
             />}
             <Navbar 
             fullName={formData ? formData.name : "Guest"} 
+            signUp = {goSign}
             cart={goCart}
             render={renderSearch}
             post={goPost}

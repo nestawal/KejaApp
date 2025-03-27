@@ -62,14 +62,18 @@ section {
 .cards-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 50px;
+  gap:20px;
+  align-content: space-evenly;
   overflow-x: auto;
   width: 100%;
+  justify-content: center;
+  align-items: center;
   
 }
 
 .card {
-  width: 175px;
+  
+  min-width: 175px;
   font-size: 12px;
   flex: 0 0 auto;         /* ADD */
   display: flex;          /* ADD */
@@ -217,9 +221,27 @@ form p a{
 
 }
 /*searchbar*/
+.srchBtn{
+  height: fit-content;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+}
+.srchImg{
+  height: 20px;
+  width: 20px;
+}
+
+.srchSpc{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-height: 90px;
+}
+
 .searchbar{
   background: #eaeaea;
-  margin: 15px 0;
+ margin: 0 auto;
   border-radius: 1rem;
   display: flex;
   align-items: center;
@@ -227,7 +249,6 @@ form p a{
   transition: max-height 0.5s;
   overflow: hidden;
   max-width: fit-content;
-  margin: 5%;
   justify-content: center;
 }
 .search{
@@ -237,8 +258,8 @@ form p a{
   background-color: #55555569;
 }
 .searchImg{
-  height: 10px;
-  width: 10px;
+  height: 20px;
+  width: 20px;
 }
 
 .menu{
@@ -259,4 +280,45 @@ form p a{
 
 .dropdown-none{
   display: none;
+}
+
+
+
+/* Smartphones (portrait and landscape) */
+@media only screen and (max-width: 767px) {
+  body {
+    font-size: 14px;
+    
+  }
+
+  nav {
+    height: 90px;
+    padding: 10px;
+    box-shadow: 0px 2.98256px 7.4564px rgba(0, 0, 0, 0.1);
+    
+  }
+
+  nav h3{
+    font-size: 20px;
+  }
+
+  .nav--logo {
+    width: 55px;
+    height: 30px;
+  }
+  
+  .navBrand h3{
+    font-size: 40px;
+  }
+
+  .cards-list {
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto; 
+    gap: 10px;
+  }
+  .card {
+    min-width: 100%;
+  }
+
 }

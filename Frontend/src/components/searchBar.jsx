@@ -3,7 +3,7 @@ import React from 'react'
 export default function Search(prop){
    
     return(
-        <div>
+        <div className='srchSpc'>
             <div className='searchbar'>
                 <input
                 name="title"

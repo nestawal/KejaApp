@@ -4,16 +4,9 @@ import { Navigate,useNavigate } from 'react-router-dom';
 
 export default function Navbar(props) {
     const navigate = useNavigate()
-    const [goSign, setGoSign] = React.useState(false);
     const menuRef = useRef(null);
 
-    if(goSign){
-      return <Navigate to="/signUp" />;
-    }
-    function SignUpButton(){
-        setGoSign(prevState => !prevState)
-    }
-
+    
     const [show,setShow] = useState(false)
     function showDropDown(){
         setShow(prev=> !prev)
@@ -46,12 +39,12 @@ export default function Navbar(props) {
             </div>
             <h3>{props.fullName}</h3>
             <div className="navFunctions">
-                <button onClick={props.render}>O</button>
+                <button onClick={props.render} className="srchBtn"><img   className="srchImg" src="/src/images/search.png" alt="" /></button>
                 <div className="menu" id="menu" ref={menuRef}>
                     <button onClick={showDropDown} id="menu">-</button>
                     {show && (
                     <div className={display}>
-                        <button onClick={SignUpButton}>SignUp</button>
+                        <button onClick={props.signUp}>SignUp</button>
                         <button onClick={props.cart} >Cart</button>
                         <button onClick={props.post}>MyPosts</button>
                     </div>)}

@@ -5,6 +5,7 @@ import Card from "./components/cartCard.jsx"
 export default function Cart(){
     const location = useLocation()
     const {cart} = location.state || {cart: []}
+    console.log({cart})
     
 
     const cards = cart.map(item => {
