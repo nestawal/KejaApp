@@ -5,8 +5,8 @@ import Card from "./components/cartCard.jsx"
 export default function MyPosts(){
     const navigate = useNavigate()
     const location = useLocation()
-    const {cart} = location.state || {cart: []}
     
+    const cart = location.state?.cart || [];
 
     const cards = cart.map(item => {
         return (

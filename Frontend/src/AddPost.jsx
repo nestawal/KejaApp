@@ -1,5 +1,6 @@
-import React from "react";
+import {React, useState} from "react";
 import {useLocation} from "react-router-dom"
+import axios from "axios";
 /*  title: "2 Bedroom Apartment",
     description: "Cozy and modern apartment perfect for small families.",
     price: 75,
@@ -10,8 +11,49 @@ import {useLocation} from "react-router-dom"
 
 export default function AddPost(){
     const location = useLocation();
-    const {post} = location.state || {};
+    const {formData} = location.state || {};
    
+    const [postForm,setPostForm] = useState({
+       myFile: "",
+       title:"",
+       location:"",
+       rooms:"",
+       price:""
+      })
+      
+      function handleChange(e){
+        setPostForm(prev=>{
+          return{
+            ...prev,
+            [e.target.name] : e.target.value 
+          }
+        })
+      }
+      console.log(formData)
+      
+      function handleSubmit(e){
+        e.preventDefault()
+        axios.post("http://localhost:3001/identities/signup",{
+            myFile: postForm.myFile,
+            title: postForm.title,
+            location: postForm.location,
+            rooms: postForm.rooms,
+            price: postForm.price
+        })
+        .then(result=>{console.log(result)//then go back to the myposts page retrieving the email of formDta 
+          navigate("/posts",{state: {formData}})
+        })
+        .catch(error=>console.log(error))
+      
+      }
+      
+      
+      
+      function goLogin(){
+        navigate("/login")
+      }
+      
+
     return(
         <div>
                 
@@ -22,7 +64,12 @@ export default function AddPost(){
                     <div className="input-group">
                         <div className="postDetails" >
                         <i className="fa-solid fa-envelope"></i>
-                        <input type="file" id="myFile" name="myFile" accept="image/" required/>
+                        <input 
+                        type="file" 
+                        id="myFile" 
+                        name="myFile"
+                        value={postForm.myFile} 
+                        accept="image/" required/>
                         </div>
 
                         <div className="postDetails" >
@@ -30,7 +77,8 @@ export default function AddPost(){
                         <input
                         type="text" 
                         placeholder="title" 
-                        name="description"
+                        name="title"
+                        value={postForm.title}
                         required
                         />
                         </div>
@@ -41,6 +89,7 @@ export default function AddPost(){
                         type="text" 
                         placeholder="City,Country(Start each with a capital letter)" 
                         name="location"
+                        value={postForm.location}
                         required
                         />
                         </div>
@@ -51,6 +100,7 @@ export default function AddPost(){
                         type="text" 
                         placeholder="rooms" 
                         name="rooms"
+                        value={postForm.location}
                         required
                         />
                         </div>
@@ -61,6 +111,7 @@ export default function AddPost(){
                         type="text" 
                         placeholder="price(ksh)" 
                         name="price"
+                        value={postForm.price}
                         required
                         />
                         </div>

@@ -4,6 +4,7 @@ import Card from "./components/Card.jsx"
 import data from "./data.js"
 import Search from "./components/searchBar.jsx"
 import {useLocation,useNavigate} from "react-router-dom"
+import SideBar from "./SideBar.jsx"
 
 export default function App() {
     const navigate = useNavigate()
@@ -19,7 +20,7 @@ export default function App() {
     }
 
     function goPost(){
-        navigate("/posts",{state:{posts}})
+        navigate("/posts",{state:{formData}})
     }
 
     //console.log(isListed)
@@ -91,6 +92,11 @@ export default function App() {
     })
 
     const cards = filtered.length === 0 ? unFil : filCards ;
+
+    const [show,setShow] = useState(false)
+    function showSideBar(){
+        setShow(prev=> !prev)
+    }
     
     return (
         <div>
@@ -105,11 +111,26 @@ export default function App() {
             cart={goCart}
             render={renderSearch}
             post={goPost}
+            show = {show}
+            setShow = {setShow}
+            showSideBar = {showSideBar}
             />
-            
-            <section className="cards-list">
-                {cards}
-            </section>
+            <div className="bodySec">
+                <section style={{ minWidth: show ? '75%' : undefined }}className="cards-list">
+                    {cards}
+                    
+                </section>
+                {show && 
+                <section className="SideSec">
+                    <SideBar 
+                        signUp = {goSign}
+                        cart={goCart}
+                        render={renderSearch}
+                        post={goPost}
+                    />
+                </section>}
+            </div>
+           
         </div>
     )
 }

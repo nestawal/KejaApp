@@ -13,6 +13,9 @@ const IdentitySchema = mongoose.Schema(
         password:{
             type : String,
             required : true
+        },
+        balance:{
+            type : Number
         }
     }
 )

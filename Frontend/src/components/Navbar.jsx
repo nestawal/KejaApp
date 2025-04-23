@@ -3,15 +3,13 @@ import { Navigate,useNavigate } from 'react-router-dom';
 
 
 export default function Navbar(props) {
-    const navigate = useNavigate()
+    //const navigate = useNavigate()
     const menuRef = useRef(null);
 
     
-    const [show,setShow] = useState(false)
-    function showDropDown(){
-        setShow(prev=> !prev)
-    }
-    let display = show ? "dropdown" : "dropdown-none";
+   
+    console.log(props.show)
+  /*  let display = show ? "dropdown" : "dropdown-none";
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -28,7 +26,7 @@ export default function Navbar(props) {
           document.removeEventListener('click', handleClickOutside);
         };
       }, []); 
-
+*/
     //obj1 - put a menu dropdown to the side consisting of the signup ,cart , my posts 
   
     return (
@@ -41,13 +39,8 @@ export default function Navbar(props) {
             <div className="navFunctions">
                 <button onClick={props.render} className="srchBtn"><img   className="srchImg" src="/src/images/search.png" alt="" /></button>
                 <div className="menu" id="menu" ref={menuRef}>
-                    <button onClick={showDropDown} id="menu">-</button>
-                    {show && (
-                    <div className={display}>
-                        <button onClick={props.signUp}>SignUp</button>
-                        <button onClick={props.cart} >Cart</button>
-                        <button onClick={props.post}>MyPosts</button>
-                    </div>)}
+                    <button onClick={props.showSideBar} id="menu">-</button>
+                    
                 </div>
             </div>
         </nav>
