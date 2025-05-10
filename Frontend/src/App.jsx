@@ -107,10 +107,7 @@ export default function App() {
             />}
             <Navbar 
             fullName={formData ? formData.name : "Guest"} 
-            signUp = {goSign}
-            cart={goCart}
-            render={renderSearch}
-            post={goPost}
+            
             show = {show}
             setShow = {setShow}
             showSideBar = {showSideBar}

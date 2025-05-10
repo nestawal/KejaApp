@@ -18,7 +18,8 @@ export default function AddPost(){
        title:"",
        location:"",
        rooms:"",
-       price:""
+       price:"",
+       email: ""
       })
       
       function handleChange(e){
@@ -38,7 +39,8 @@ export default function AddPost(){
             title: postForm.title,
             location: postForm.location,
             rooms: postForm.rooms,
-            price: postForm.price
+            price: postForm.price,
+            email:formData.email
         })
         .then(result=>{console.log(result)//then go back to the myposts page retrieving the email of formDta 
           navigate("/posts",{state: {formData}})

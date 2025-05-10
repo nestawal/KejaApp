@@ -2,16 +2,22 @@ const mongoose = require("mongoose")
 
 const PostSchema = mongoose.Schema(
     {
-        email: String,
-        name: String,
-        description: String,
-        price: Number,
-        rooms: Number,
-        imageId: mongoose.Schema.Types.ObjectId
+         email: String,
+         imageId: mongoose.Schema.Types.ObjectId,
+         
+        posts:{
+            
+            name: String,
+            description: String,
+            price: Number,
+            rooms: Number,
+            imageId: mongoose.Schema.Types.ObjectId
+        }
     },
-    {
-        timestamps: true
-    }
+        {
+            timestamps: true
+        }
+
 );
 
 const Post = mongoose.model("Post",PostSchema);

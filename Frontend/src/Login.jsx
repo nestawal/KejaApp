@@ -51,7 +51,7 @@ function handleSubmit(event){
             
             <div className="container">
             <div className="form">
-                <h1 id="title">Sign Up</h1>
+                <h1 id="title">Sign In</h1>
                 <form>
                 <div className="input-group">
                   
