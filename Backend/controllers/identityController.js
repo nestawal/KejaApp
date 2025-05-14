@@ -11,7 +11,7 @@ const checkIdentity =(req,res)=>{
     const{email,password}= req.body
     Identitymodel.findOne({email: email})
     .then(person=>{
-       if(user){
+       if(person){
         if(person.password === password){
             res.json("found")
         }else{
@@ -21,6 +21,7 @@ const checkIdentity =(req,res)=>{
         res.json("nowhere to be found")
        }
     })
+    .catch(err => res.json(err))
 };
 
 

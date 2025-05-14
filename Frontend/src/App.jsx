@@ -11,6 +11,8 @@ export default function App() {
     const location = useLocation();
     const {formData} = location.state || {};
 
+    console.log(formData);
+
     function goSign(){
         navigate("/signUp")
     }

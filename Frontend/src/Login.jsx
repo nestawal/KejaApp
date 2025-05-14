@@ -1,5 +1,6 @@
 import {React,useState} from "react";
 import { Navigate,useNavigate } from 'react-router-dom';
+import axios from "axios"
 import { useRef } from 'react';
 
 
@@ -28,7 +29,7 @@ const goHome = () => {
 
 function handleSubmit(event){
   event.preventDefault()
-  axios.post("http://localhost:3001/login",{
+  axios.post("http://localhost:3001/identities/login",{
     name : formData.name,
     email: formData.email,
     password: formData.password
@@ -36,10 +37,12 @@ function handleSubmit(event){
   .then(result=>{
     console.log(result)
     if(result.data === "found"){
-      navigate("/")
+      navigate("/",{state: {formData}})
+      console.log("found")
     }else{
       navigate("/signUp")
       alert("please register, account not found")
+      console.log("not found")
     }
   })
   .catch(error=>console.log(error))
@@ -50,7 +53,7 @@ function handleSubmit(event){
     <div>
             
             <div className="container">
-            <div className="form">
+            <div className="form" onSubmit={handleSubmit}>
                 <h1 id="title">Sign In</h1>
                 <form>
                 <div className="input-group">
