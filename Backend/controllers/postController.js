@@ -5,6 +5,13 @@ const path = require('path');
 const pstMdl = "C:/Users/USER/kejaApp/Backend/models/postModel.js";
 const postModel = require(pstMdl);
 const mongoose = require('mongoose');
+const aws = require('aws-sdk');
+
+
+/**
+ * trying to ditch the gridfs/mongodb file storage to sdk 
+ * then when posted return the id of the file for later use
+ */
 
 // Initialize GridFS
 let gfs;

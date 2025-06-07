@@ -73,6 +73,10 @@ export default function App() {
         setRender(prev=>!prev)
     }
 
+    useEffect(() => {
+        console.log("Render state changed:", render);
+    }, [render]);
+
     const filCards = filtered.map(item => {
         return (
             <Card
@@ -109,15 +113,14 @@ export default function App() {
             />}
             <Navbar 
             fullName={formData ? formData.name : "Guest"} 
-            
+            renderSearch = {renderSearch}
             show = {show}
             setShow = {setShow}
             showSideBar = {showSideBar}
             />
             <div className="bodySec">
                 <section style={{ minWidth: show ? '75%' : undefined }}className="cards-list">
-                    {cards}
-                    
+                    {cards}  
                 </section>
                 {show && 
                 <section className="SideSec">

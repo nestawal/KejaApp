@@ -10,12 +10,17 @@ const IdentitySchema = mongoose.Schema(
             type : String,
             required : true
         },
+        agent:{
+            type: Boolean,
+            default: false
+        },
         password:{
             type : String,
             required : true
         },
         balance:{
-            type : Number
+            type : Number,
+            default : 0
         }
     }
 )

@@ -5,6 +5,7 @@
 body {
   margin: 0;
   font-family: 'Poppins', sans-serif;
+  background-color: #EFF4EB;
   
 }
 
@@ -17,6 +18,7 @@ nav {
   justify-content: space-between;
   max-width: 100%;
   border-bottom: 2px  solid #3c00a3; 
+  background-color: #EFF4EB;
 }
 .nav
 
@@ -74,7 +76,7 @@ section {
   display: flex;
   flex-direction: row;
   
-  background: rgba(63, 131, 63, 0.742);
+  background: #EFF4EB;
   background-position: center;
   background-size: cover;
 }
@@ -101,7 +103,7 @@ section {
 }
 
 .card {
-  background: white;
+  background: #D9D9D9;
   min-width: 175px;
   font-size: 12px;
   flex: 0 0 auto;         /* ADD */
@@ -160,6 +162,7 @@ section {
   max-width: fit-content;
   padding-left: 25px;
   padding-right: 25px;
+  background-color: #18932a;
 }
 
 /*for the signUp part */

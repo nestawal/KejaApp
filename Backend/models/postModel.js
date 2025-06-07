@@ -11,7 +11,7 @@ const PostSchema = mongoose.Schema(
             description: String,
             price: Number,
             rooms: Number,
-            imageId: mongoose.Schema.Types.ObjectId
+             
         }
     },
         {

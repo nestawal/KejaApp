@@ -37,7 +37,9 @@ export default function Navbar(props) {
             </div>
             <h3>{props.fullName}</h3>
             <div className="navFunctions">
-                <button onClick={props.render} className="srchBtn"><img   className="srchImg" src="/src/images/search.png" alt="" /></button>
+                <button onClick={props.renderSearch} className="srchBtn">
+                  <img   className="srchImg" src="/src/images/search.png" alt="" />
+                </button>
                 <div className="menu" id="menu" ref={menuRef}>
                     <button onClick={props.showSideBar} id="menu">-</button>
                     

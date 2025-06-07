@@ -1,10 +1,26 @@
 const idmodel = "C:/Users/USER/kejaApp/Backend/models/identityModel.js";
 const Identitymodel = require(idmodel);
+const Cart = require("C:/Users/USER/kejaApp/Backend/models/cartModel.js");
 
-const createIdentity =(req,res)=>{
-    Identitymodel.create(req.body)
-    .then(Identity => res.json(Identity))
-    .catch(err => res.json(err))
+
+
+const createIdentity = async(req,res) =>{
+    try{
+        //create new identity
+        const newId = await Identitymodel.create(req.body)
+
+        //create identity cart
+        const newCart = await Cart.create({
+            email: newId.email,
+            items: []
+        })
+
+        res.json({
+            user: newId,
+            cart: newCart
+        })
+    }
+    catch(err){  res.status(500).json({ error: err.message });}
 };
 
 const checkIdentity =(req,res)=>{
