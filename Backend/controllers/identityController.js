@@ -1,6 +1,6 @@
-const idmodel = "C:/Users/USER/kejaApp/Backend/models/identityModel.js";
+const idmodel = "../models/identityModel";
 const Identitymodel = require(idmodel);
-const Cart = require("C:/Users/USER/kejaApp/Backend/models/cartModel.js");
+const Cart = require("../models/cartModel");
 
 
 

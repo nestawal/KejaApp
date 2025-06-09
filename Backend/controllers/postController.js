@@ -2,7 +2,7 @@
 const { GridFSBucket } = require('mongodb');
 const multer = require('multer');
 const path = require('path');
-const pstMdl = "C:/Users/USER/kejaApp/Backend/models/postModel.js";
+const pstMdl = "../models/postModel";
 const postModel = require(pstMdl);
 const mongoose = require('mongoose');
 const aws = require('aws-sdk');

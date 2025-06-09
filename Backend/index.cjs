@@ -7,12 +7,14 @@ app.use(express.json());
 app.use(cors({origin :'http://localhost:5173'}));
 const bodyParser = require("body-parser");
 const Database = require('./database.js');
-const identityRoute = require("C:/Users/USER/kejaApp/Backend/routes/identityRoute.js");
-const postRoute = require("C:/Users/USER/kejaApp/Backend/routes/postRoute.js");
+const identityRoute = require("./routes/identityRoute.js");
+const postRoute = require("./routes/postRoute.js");
+const cartRoute = require("./routes/cartRoute.js");
 
 
 app.use('/identities',identityRoute)
 app.use("/Post",postRoute)
+app.use("/Cart",cartRoute)
 
 mongoose.connect(Database)
     .then(()=>{
