@@ -2,15 +2,25 @@ const mongoose = require("mongoose")
 
 const PostSchema = mongoose.Schema(
     {
-         email: String,
+         email: {
+            type : String,
+            required: true},
          imageId: mongoose.Schema.Types.ObjectId,
          
         posts:{
             
-            name: String,
-            description: String,
-            price: Number,
-            rooms: Number,
+            name: {
+                type : String,
+                required: true},
+            description: {
+                type : String, 
+                required: true},
+            price: {
+                type : String,
+                required: true},
+            rooms: {
+                type: String,
+                required: true},
              
         }
     },

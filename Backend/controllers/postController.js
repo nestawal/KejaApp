@@ -2,7 +2,7 @@
 const { GridFSBucket } = require('mongodb');
 const multer = require('multer');
 const path = require('path');
-const pstMdl = "../models/postModel";
+const pstMdl = "../models/postModel.js";
 const postModel = require(pstMdl);
 const mongoose = require('mongoose');
 const aws = require('aws-sdk');
@@ -85,4 +85,43 @@ const getImage = async (req, res) => {
 };
 
 
-module.exports = { upload, createPost, getImage };
+const getPostFeed = async (req,res) => {
+    try{
+        const conn = mongoose.connection;
+        const bucket = new GridFSBucket(conn.db,{
+            bucketName : 'uploads'
+        });
+
+        const posts = await postModel.find({});
+        console.log(typeof pstMdl);
+        console.log(pstMdl);
+        const enrPosts = await Promise.all(posts.map(async (post) =>{
+            if (!post.fileId) return post;
+
+            const chunks = [];
+            const stream = openDownloadStream(post.fileId);
+
+            return new Promise((resolve,reject) => {
+                stream.post('data',(chunk) => chunks.push(chunk));
+                stream.on('error',(err) => reject(err));
+                stream.on('end',() =>{
+                    const fileBuffer = Buffer.concat(chunks);
+                    const fileBase64 = fileBuffer.toString('base64');
+
+                    resolve({
+                        ...post.toObject(),
+                        file : fileBase64
+                    });
+                });
+            });
+        }));
+        res.status(200).json(enrPosts);
+    } catch (error){
+        console.log("error retrieving posts:",error);
+        res.status(500).json({message:"server error",error:error.message})
+    };
+
+};
+
+
+module.exports = { upload, createPost, getImage ,getPostFeed};

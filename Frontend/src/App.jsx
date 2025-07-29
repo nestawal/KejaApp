@@ -5,6 +5,7 @@ import data from "./data.js"
 import Search from "./components/searchBar.jsx"
 import {useLocation,useNavigate} from "react-router-dom"
 import SideBar from "./SideBar.jsx"
+import axios from "axios"
 
 export default function App() {
     const navigate = useNavigate()
@@ -67,6 +68,43 @@ export default function App() {
     }
     console.log(filtered)
 
+
+    const [dataNew, setDataNew] = useState([]);
+    const [error, setError] = useState(null); // Optional: for error handling
+    const [loading, setLoading] = useState(true); // Optional: for loading state
+
+    // 2. Use useEffect to perform the data fetching
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                setLoading(true); // Set loading to true before fetching
+                const response = await fetch("http://localhost:3001/Post/feed");
+                setDataNew(response.data); // Update state with the fetched data
+            } catch (err) {
+                setError(err.message); // Set error state if something goes wrong
+                console.error("Error fetching data:", err);
+            } finally {
+                setLoading(false); // Set loading to false after fetching (success or error)
+            }
+        };
+
+        fetchData(); // Call the async function inside useEffect
+        // The empty dependency array [] means this effect runs only once after the initial render.
+        // This is crucial to prevent infinite loops for initial data fetches.
+    }, []);
+
+    const newCards = Array.isArray(dataNew)
+    ?dataNew.map(item => {
+        (
+             <Card
+                key={item.id}
+                {...item}
+                cart={()=>handleCart(item)}
+            />
+        )
+    }): null;
+
+
     console.log(search)
     const [render,setRender] = useState(false)    
     function renderSearch(){
@@ -120,7 +158,8 @@ export default function App() {
             />
             <div className="bodySec">
                 <section style={{ minWidth: show ? '75%' : undefined }}className="cards-list">
-                    {cards}  
+                    {cards} 
+                    {newCards} 
                 </section>
                 {show && 
                 <section className="SideSec">

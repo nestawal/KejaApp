@@ -60,7 +60,7 @@ export default function AddPost(){
         <div>
                 
                 <div className="postContainer">
-                <div className="postForm" >
+                <div className="postForm"  onSubmit={handleChange}>
                     <h1 id="title">Add Post</h1>
                     <form>
                     <div className="input-group">
@@ -70,6 +70,7 @@ export default function AddPost(){
                         type="file" 
                         id="myFile" 
                         name="myFile"
+                        onChange = {handleChange}
                         value={postForm.myFile} 
                         accept="image/" required/>
                         </div>
@@ -80,6 +81,7 @@ export default function AddPost(){
                         type="text" 
                         placeholder="title" 
                         name="title"
+                         onChange = {handleChange}
                         value={postForm.title}
                         required
                         />
@@ -91,6 +93,7 @@ export default function AddPost(){
                         type="text" 
                         placeholder="City,Country(Start each with a capital letter)" 
                         name="location"
+                        onChange = {handleChange}
                         value={postForm.location}
                         required
                         />
@@ -102,7 +105,8 @@ export default function AddPost(){
                         type="text" 
                         placeholder="rooms" 
                         name="rooms"
-                        value={postForm.location}
+                        onChange = {handleChange}
+                        value={postForm.rooms}
                         required
                         />
                         </div>
@@ -113,6 +117,7 @@ export default function AddPost(){
                         type="text" 
                         placeholder="price(ksh)" 
                         name="price"
+                        onChange = {handleChange}
                         value={postForm.price}
                         required
                         />
@@ -121,7 +126,7 @@ export default function AddPost(){
                        
                     </div>
                     
-                    <button  className="addBtn" id="addBtn">Add</button>
+                    <button  className="addBtn" id="addBtn" type="submit">Add</button>
            
                     </form>
                 </div>

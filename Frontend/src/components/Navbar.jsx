@@ -28,6 +28,11 @@ export default function Navbar(props) {
       }, []); 
 */
     //obj1 - put a menu dropdown to the side consisting of the signup ,cart , my posts 
+
+    const [isAdmin,setIsAdmin] = useState(false);
+    if(props.fullname === 'admin'){
+      setIsAdmin(prev => !prev)
+    }
   
     return (
         <nav>

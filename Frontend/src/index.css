@@ -89,6 +89,10 @@ section {
   background-color: #3c00a3;
 }
 
+.SideSec Link{
+  width: fit-content;
+}
+
 
 .cards-list {
   display: flex;
