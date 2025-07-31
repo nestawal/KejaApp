@@ -5,12 +5,15 @@ import data from "./data.js"
 import Search from "./components/searchBar.jsx"
 import {useLocation,useNavigate} from "react-router-dom"
 import SideBar from "./SideBar.jsx"
-import axios from "axios"
+
 
 export default function App() {
     const navigate = useNavigate()
     const location = useLocation();
-    const {formData} = location.state || {};
+    const formData = location.state?.formData;
+    if(formData != null){
+         console.log(formData.name);
+    } 
 
     console.log(formData);
 
@@ -18,15 +21,6 @@ export default function App() {
         navigate("/signUp")
     }
 
-    function goCart(){
-        navigate("/cart",{state:{cart}})
-    }
-
-    function goPost(){
-        navigate("/posts",{state:{formData}})
-    }
-
-    //console.log(isListed)
     const[cart,setCart]= useState([])
     function handleCart(newItem){
             setCart(prev=>[
@@ -36,6 +30,18 @@ export default function App() {
         
     }
     console.log(cart);
+
+    useEffect(()=>{
+        localStorage.setItem("cart",JSON.stringify(cart))
+    })
+
+    function goCart(){
+        navigate("/cart",{state:{cart}})
+    }
+
+    function goPost(){
+        navigate("/posts",{state:{formData}})
+    }
    
     //search functionality
     //search functionality
@@ -74,23 +80,21 @@ export default function App() {
     const [loading, setLoading] = useState(true); // Optional: for loading state
 
     // 2. Use useEffect to perform the data fetching
-    useEffect(() => {
+    
         const fetchData = async () => {
             try {
-                setLoading(true); // Set loading to true before fetching
+                setLoading(true); 
                 const response = await fetch("http://localhost:3001/Post/feed");
-                setDataNew(response.data); // Update state with the fetched data
+                setDataNew(response.data); 
             } catch (err) {
-                setError(err.message); // Set error state if something goes wrong
+                setError(prev => (err.message)); 
                 console.error("Error fetching data:", err);
             } finally {
-                setLoading(false); // Set loading to false after fetching (success or error)
+                setLoading(prev => true); 
             }
         };
-
-        fetchData(); // Call the async function inside useEffect
-        // The empty dependency array [] means this effect runs only once after the initial render.
-        // This is crucial to prevent infinite loops for initial data fetches.
+    useEffect(() => {
+        fetchData(); 
     }, []);
 
     const newCards = Array.isArray(dataNew)
@@ -155,9 +159,11 @@ export default function App() {
             show = {show}
             setShow = {setShow}
             showSideBar = {showSideBar}
+            
             />
             <div className="bodySec">
                 <section style={{ minWidth: show ? '75%' : undefined }}className="cards-list">
+
                     {cards} 
                     {newCards} 
                 </section>

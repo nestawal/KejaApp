@@ -2,8 +2,7 @@
 const { GridFSBucket } = require('mongodb');
 const multer = require('multer');
 const path = require('path');
-const pstMdl = "../models/postModel.js";
-const postModel = require(pstMdl);
+const postModel = require("../models/postModel.js");
 const mongoose = require('mongoose');
 const aws = require('aws-sdk');
 
@@ -93,8 +92,8 @@ const getPostFeed = async (req,res) => {
         });
 
         const posts = await postModel.find({});
-        console.log(typeof pstMdl);
-        console.log(pstMdl);
+        console.log(typeof postModel);
+        console.log(postModel);
         const enrPosts = await Promise.all(posts.map(async (post) =>{
             if (!post.fileId) return post;
 

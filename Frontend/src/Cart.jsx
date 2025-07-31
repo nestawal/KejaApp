@@ -2,9 +2,10 @@ import React from "react"
 import {useLocation} from "react-router-dom"
 import Card from "./components/cartCard.jsx"
 
+
 export default function Cart(){
     const location = useLocation()
-    const {cart} = location.state || {cart: []}
+    const cart = location.state?.cart || JSON.parse(localStorage.getItem("cart")) || [];
     console.log({cart})
     
 

@@ -1,33 +1,21 @@
 import React,{useState,useEffect,useRef} from "react";
 import { Navigate,useNavigate } from 'react-router-dom';
+import {useLocation} from "react-router-dom"
 
 
 export default function Navbar(props) {
     //const navigate = useNavigate()
     const menuRef = useRef(null);
+    const location = useLocation();
+    const cart = props.cart
+    console.log(cart)
+
+    
 
     
    
     console.log(props.show)
-  /*  let display = show ? "dropdown" : "dropdown-none";
-
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-          if (menuRef.current && !menuRef.current.contains(event.target)) {
-            setShow(false);
-          }
-        };
-    
-        // Add event listener when the component mounts
-        document.addEventListener('click', handleClickOutside);
-    
-        // Remove event listener when the component unmounts (important!)
-        return () => {
-          document.removeEventListener('click', handleClickOutside);
-        };
-      }, []); 
-*/
-    //obj1 - put a menu dropdown to the side consisting of the signup ,cart , my posts 
+  
 
     const [isAdmin,setIsAdmin] = useState(false);
     if(props.fullname === 'admin'){
