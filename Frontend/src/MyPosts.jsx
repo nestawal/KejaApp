@@ -5,7 +5,8 @@ import Card from "./components/cartCard.jsx"
 export default function MyPosts(){
     const navigate = useNavigate()
     const location = useLocation()
-    const {formData} = location.state || {};
+    const formData = location.state || {};
+    console.log(formData)
     
     const cart = location.state?.cart || [];
 

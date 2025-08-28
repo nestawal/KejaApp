@@ -4,7 +4,8 @@ const multer = require('multer');
 const path = require('path');
 const postModel = require("../models/postModel.js");
 const mongoose = require('mongoose');
-const aws = require('aws-sdk');
+const fs = require('fs');
+//const aws = require('aws-sdk');
 
 
 /**
@@ -23,7 +24,10 @@ conn.once('open', () => {
 const upload = multer({ storage: multer.memoryStorage() });
 
 // Create a new post with an image
+
 const createPost = async (req, res) => {
+    //frontend to backend isn't working work on that kesho
+    console.log("File received:",req.file);
     try {
         if (!req.file) {
             return res.status(400).json({ message: 'No file uploaded.' });
@@ -35,18 +39,21 @@ const createPost = async (req, res) => {
             contentType: req.file.mimetype,
         });
 
-        writeStream.write(req.file.buffer);
-        writeStream.end();
+        
+        writeStream.end(req.file.buffer);
 
         writeStream.on('finish', async () => {
             // Create a new post with the GridFS file ID
             const newPost = new postModel({
                 email: req.body.email,
-                name: req.body.name,
-                description: req.body.description,
-                price: req.body.price,
-                rooms: req.body.rooms,
-                imageId: writeStream.id, // Store the GridFS file ID
+                imageId: writeStream.id,
+                posts: {
+                    name: req.body["posts[name]"],
+                    description: req.body["posts[description]"],
+                    location: req.body["posts[location]"],
+                    rooms: req.body["posts[rooms]"],
+                    price: req.body["posts[price]"]
+                }
             });
 
             await newPost.save();
@@ -62,6 +69,9 @@ const createPost = async (req, res) => {
         res.status(500).json({ message: 'Error creating post.' });
     }
 };
+
+
+
 
 // Get an image by ID
 const getImage = async (req, res) => {

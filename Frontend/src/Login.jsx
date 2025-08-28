@@ -36,8 +36,8 @@ function handleSubmit(event){
   })
   .then(result=>{
     console.log(result)
-    if(result.data === "found"){
-      navigate("/",{state: {formData}})
+    if(result.data.status === "found"){
+      navigate("/",{state: {user: result.data.person}})
       console.log("found")
     }else{
       navigate("/signUp")

@@ -1,6 +1,5 @@
 const express =  require("express");
-//const Identitymodel = require("./models/identity.model.js");
-//const Identitymodel = require('./models/identityModel.js');
+const { isAdmin } = require("../controllers/identityController");
 const Controller = "C:/Users/USER/kejaApp/Backend/controllers/identityController"
 const router = express.Router();
 const {createIdentity,checkIdentity} = require(Controller)
@@ -8,5 +7,6 @@ const {createIdentity,checkIdentity} = require(Controller)
 
 router.post("/signup",createIdentity);
 router.post("/login",checkIdentity);
+router.post("/isAdmin",isAdmin);
 
 module.exports = router;

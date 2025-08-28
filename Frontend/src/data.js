@@ -11,6 +11,7 @@ const data = [
         },
         location: "New York, USA",
         openSpots: 2,
+        email: "admin@gmail.com"
     },
     {
         id: 2,
@@ -24,7 +25,7 @@ const data = [
         },
         location: "Bali, Indonesia",
         openSpots: 1,
-        postedBy: "admin"
+        email: "admin@gmail.com"
     },
     {
         id: 3,
@@ -38,7 +39,7 @@ const data = [
         },
         location: "Malibu, USA",
         openSpots: 3,
-        postedBy: "admin"
+        email: "admin@gmail.com"
     },
     {
         id: 4,
@@ -52,7 +53,7 @@ const data = [
         },
         location: "Aspen, USA",
         openSpots: 4,
-        postedBy: "admin"
+        email: "admin@gmail.com"
     },
     {
         id: 5,
@@ -66,7 +67,7 @@ const data = [
         },
         location: "Tokyo, Japan",
         openSpots: 2,
-        postedBy: "admin"
+        email: "admin@gmail.com"
     },
     {
         id: 6,
@@ -80,7 +81,7 @@ const data = [
         },
         location: "Tuscany, Italy",
         openSpots: 3,
-        postedBy: "admin"
+        email: "admin@gmail.com"
     },
     {
         id: 7,
@@ -94,7 +95,7 @@ const data = [
         },
         location: "Dubai, UAE",
         openSpots: 1,
-        postedBy: "admin"
+        email: "admin@gmail.com"
     },
     {
         id: 8,
@@ -108,7 +109,7 @@ const data = [
         },
         location: "Sydney, Australia",
         openSpots: 5,
-        postedBy: "admin"
+        email: "admin@gmail.com"
     },
     {
         id: 9,
@@ -122,7 +123,7 @@ const data = [
         },
         location: "Paris, France",
         openSpots: 2,
-        postedBy: "admin"
+        email: "admin@gmail.com"
     },
     {
         id: 10,
@@ -136,7 +137,7 @@ const data = [
         },
         location: "Edinburgh, Scotland",
         openSpots: 1,
-        postedBy: "admin"
+        email: "admin@gmail.com"
     },
 ];
 

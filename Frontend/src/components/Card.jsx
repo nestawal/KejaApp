@@ -1,20 +1,28 @@
 import React,{useState} from "react"
+import { Link } from "react-router-dom"
 
 const Card =(props) => {
-    let badgeText
+    console.log(props)
+    console.log(props.id);
+    console.log(props.postLogOnly)
+
+    let badgeText;
     if (props.openSpots === 0) {
         badgeText = "SOLD OUT"
     } else if (props.location === "Online") {
         badgeText = "ONLINE"
     }
-const [isListed,setListed] = useState(false)
-function weka(){
-    setListed(prevState => !prevState)
-    if(!isListed){
-        props.cart();
-    }
-   
-} 
+
+    const [isListed,setListed] = useState(false)
+    function weka(){
+        setListed(prevState => !prevState)
+        if(!isListed){
+            props.cart();
+        }
+    
+    } 
+
+
 
     
     return (
@@ -37,8 +45,11 @@ function weka(){
             <p className="card--price">
                 <span className="bold">From ksh{props.price}</span> / person
             </p>
-            
-            <button onClick={weka}>{isListed ? "Listed":"List"}</button>
+            <div>
+                {props.postLogOnly && <button onClick={weka}>{isListed ? "Listed":"List"}</button> }
+                <Link to={`/posts/${props.id}`}><button>...</button></Link>
+                <button>request</button>
+            </div>
             
         </div>
     )

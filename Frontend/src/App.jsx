@@ -10,12 +10,17 @@ import SideBar from "./SideBar.jsx"
 export default function App() {
     const navigate = useNavigate()
     const location = useLocation();
-    const formData = location.state?.formData;
-    if(formData != null){
-         console.log(formData.name);
-    } 
+    const formData = location.state?.user || {};
 
-    console.log(formData);
+
+    useEffect(()=>{
+        if(formData){
+            console.log(formData)
+        }else{
+            console.log("formData not available")
+        }
+    },[formData])
+
 
     function goSign(){
         navigate("/signUp")
@@ -81,18 +86,19 @@ export default function App() {
 
     // 2. Use useEffect to perform the data fetching
     
-        const fetchData = async () => {
-            try {
-                setLoading(true); 
-                const response = await fetch("http://localhost:3001/Post/feed");
-                setDataNew(response.data); 
-            } catch (err) {
-                setError(prev => (err.message)); 
-                console.error("Error fetching data:", err);
-            } finally {
-                setLoading(prev => true); 
-            }
-        };
+    const fetchData = async () => {
+        try {
+            setLoading(true); 
+            const response = await fetch("http://localhost:3001/Post/feed");
+            setDataNew(response.data); 
+            console.log(dataNew)
+        } catch (err) {
+            setError(prev => (err.message)); 
+            console.error("Error fetching data:", err);
+        } finally {
+            setLoading(prev => true); 
+        }
+    };
     useEffect(() => {
         fetchData(); 
     }, []);
@@ -104,6 +110,7 @@ export default function App() {
                 key={item.id}
                 {...item}
                 cart={()=>handleCart(item)}
+
             />
         )
     }): null;
@@ -119,33 +126,44 @@ export default function App() {
         console.log("Render state changed:", render);
     }, [render]);
 
-    const filCards = filtered.map(item => {
+
+   
+    const [show,setShow] = useState(false)
+    function showSideBar(){
+        setShow(prev=> !prev)
+    }
+
+
+    //not show list button and dashboard if user is not signed in 
+    const postLogOnly = formData.name ? true : false ;
+    console.log(postLogOnly);
+
+     const filCards = filtered.map(item => {
         return (
             <Card
-                key={item.id}
                 {...item}
+                key={item.id}
                 cart={()=>handleCart(item)}
+                postLogOnly = {postLogOnly}
             />
         )
     })
 
-    const unFil = data.map(item => {
+     const unFil = data.map(item => {
         return (
             <Card
-                key={item.id}
                 {...item}
+                key={item.id}
                 cart={()=>handleCart(item)}
+                postLogOnly = {postLogOnly}
+                
             />
         )
     })
 
     const cards = filtered.length === 0 ? unFil : filCards ;
 
-    const [show,setShow] = useState(false)
-    function showSideBar(){
-        setShow(prev=> !prev)
-    }
-    
+
     return (
         <div>
             {render && <Search
@@ -164,7 +182,7 @@ export default function App() {
             <div className="bodySec">
                 <section style={{ minWidth: show ? '75%' : undefined }}className="cards-list">
 
-                    {cards} 
+                    {cards  } 
                     {newCards} 
                 </section>
                 {show && 
@@ -174,6 +192,7 @@ export default function App() {
                         cart={goCart}
                         render={renderSearch}
                         post={goPost}
+                        formData={formData}
                     />
                 </section>}
             </div>

@@ -29,7 +29,7 @@ const checkIdentity =(req,res)=>{
     .then(person=>{
        if(person){
         if(person.password === password){
-            res.json("found")
+            res.json({status:"found",person})
         }else{
             res.json("wrong password")
         }
@@ -40,9 +40,27 @@ const checkIdentity =(req,res)=>{
     .catch(err => res.json(err))
 };
 
+const isAdmin=(req,res)=>{
+    const{email} = req.body
+    Identitymodel.findOne({email : email})
+    .then(person=>{
+        if(person){
+            if(person.agent === true){
+                res.json("user is registered as agent")
+            }else{
+                res.json("Do U want to sign is as an agent?")
+            }
+        }else{
+            res.json("person not in the system")
+        }
+    })
+    .catch(err => res.json(err))
+};
+
 
 
 module.exports = {
     createIdentity,
-    checkIdentity
+    checkIdentity,
+    isAdmin
 };
