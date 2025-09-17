@@ -1,4 +1,4 @@
-const data = [
+const fuggazi = [
     {
         id: 1,
         title: "2 Bedroom Apartment",
@@ -141,4 +141,4 @@ const data = [
     },
 ];
 
-export default data;
+export default fuggazi;

@@ -8,7 +8,7 @@ export default function SideBar(props){
         <div className="SideSec">
             <Link to='signUp'><button >SignUp</button></Link>
             <Link to='/cart' state={props.formData}><button  >Cart</button></Link>
-            <Link to='posts' state={props.formData}><button>MyPosts</button></Link>
+            <Link to='posts' state={props.formData}><button>DashBoard</button></Link>
             <button>Log out</button>
         </div>
     )

@@ -1,11 +1,11 @@
 import {React,useState,useEffect} from "react"
 import Navbar from "./components/Navbar.jsx"
 import Card from "./components/Card.jsx"
-import data from "./data.js"
+import fuggazi from "./data.js"
 import Search from "./components/searchBar.jsx"
 import {useLocation,useNavigate} from "react-router-dom"
 import SideBar from "./SideBar.jsx"
-
+import NewCard from "./components/newCard.jsx"
 
 export default function App() {
     const navigate = useNavigate()
@@ -69,9 +69,9 @@ export default function App() {
     const [filtered,setFiltered] = useState([])
     function filterCards(){
             if(search.title==""&&search.location==""){
-                setFiltered(data)
+                setFiltered(fuggazi)
             }else{
-                const filteredData = data.filter(item => 
+                const filteredData = fuggazi.filter(item => 
                     item.title.toLowerCase() === search.title.toLowerCase() || 
                     item.location.toLowerCase() === search.location.toLowerCase() ); 
                 setFiltered(filteredData);
@@ -81,6 +81,7 @@ export default function App() {
 
 
     const [dataNew, setDataNew] = useState([]);
+    console.log(dataNew);
     const [error, setError] = useState(null); // Optional: for error handling
     const [loading, setLoading] = useState(true); // Optional: for loading state
 
@@ -90,30 +91,21 @@ export default function App() {
         try {
             setLoading(true); 
             const response = await fetch("http://localhost:3001/Post/feed");
-            setDataNew(response.data); 
-            console.log(dataNew)
+            const data = await response.json();
+            console.log(data);
+            setDataNew(data); 
         } catch (err) {
-            setError(prev => (err.message)); 
+            setError(err.message); 
             console.error("Error fetching data:", err);
         } finally {
-            setLoading(prev => true); 
+            setLoading(false); 
         }
     };
     useEffect(() => {
         fetchData(); 
     }, []);
 
-    const newCards = Array.isArray(dataNew)
-    ?dataNew.map(item => {
-        (
-             <Card
-                key={item.id}
-                {...item}
-                cart={()=>handleCart(item)}
-
-            />
-        )
-    }): null;
+   
 
 
     console.log(search)
@@ -149,7 +141,7 @@ export default function App() {
         )
     })
 
-     const unFil = data.map(item => {
+     const unFil = fuggazi.map(item => {
         return (
             <Card
                 {...item}
@@ -162,6 +154,22 @@ export default function App() {
     })
 
     const cards = filtered.length === 0 ? unFil : filCards ;
+
+     const newCards = dataNew.map(item => (
+             <NewCard
+                key={item.id}
+                {...item}
+                postLogOnly = {postLogOnly}
+                cart={()=>handleCart(item)}
+                file={item.file}
+                description={item.posts.description}
+                price={item.posts.price}
+                title={item.posts.name}
+                location={item.posts.location}
+
+            />
+        )
+    );
 
 
     return (

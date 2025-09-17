@@ -125,7 +125,10 @@ section {
 }
 
 .card--image {
-  width: 100%;
+  min-width: 250px;
+  max-width: 250px;
+  min-height: 150px;
+  max-height: 150px;
   border-radius: 9px;
   margin-bottom: 9px;
 }

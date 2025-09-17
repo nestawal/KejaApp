@@ -1,4 +1,6 @@
-
+const express= require('express')
+const app = express();
+app.use('/uploads',express.static("uploads"));
 const { GridFSBucket } = require('mongodb');
 const multer = require('multer');
 const path = require('path');
@@ -23,57 +25,7 @@ conn.once('open', () => {
 // Set up multer to store files in memory
 const upload = multer({ storage: multer.memoryStorage() });
 
-// Create a new post with an image
 
-/*const createPost = async (req, res) => {
-    //frontend to backend isn't working work on that kesho
-    console.log("File received:",req.file);
-    try {
-        if (!req.file) {
-            return res.status(400).json({ message: 'No file uploaded.' });
-        }
-
-        // Upload the file to GridFS
-        const filename = Date.now() + path.extname(req.file.originalname);
-        const writeStream = gfs.openUploadStream(filename, {
-            contentType: req.file.mimetype,
-        });
-
-        
-        writeStream.end(req.file.buffer);
-
-        writeStream.on('finish', async () => {
-            // Create a new post with the GridFS file ID
-            const name = req.body.name
-            const description = req.body.description
-            const location = req.body.location
-            const rooms = req.body.rooms
-            const price = req.body.price
-            const newPost = new postModel({
-                email: req.body.email,
-                imageId: writeStream.id,
-                posts: {
-                    name: name,
-                    description: description,
-                    location: location,
-                    rooms: rooms,
-                    price: price
-                }
-            });
-
-            await newPost.save();
-            res.status(201).json(newPost);
-        });
-
-        writeStream.on('error', (error) => {
-            console.error(error);
-            res.status(500).json({ message: 'Error uploading file to GridFS.' });
-        });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Error creating post.' });
-    }
-};*/
 const createPost = async (req, res) => {
   console.log("File received:", req.file);
   
@@ -193,7 +145,7 @@ const getPostFeed = async (req,res) => {
             if (!post.imageId) return post;
 
             const chunks = [];
-            const stream = bucket.openDownloadStream(post.fileId);
+            const stream = bucket.openDownloadStream(post.imageId);
 
             return new Promise((resolve,reject) => {
                 stream.on('data',(chunk) => chunks.push(chunk));
@@ -217,5 +169,46 @@ const getPostFeed = async (req,res) => {
 
 };
 
+const getMyPosts = async (req,res) => {
+  try{
+    const conn = mongoose.connection;
+    const bucket = new GridFSBucket(conn.db,{
+       bucketName : 'uploads'
+    });
 
-module.exports = { upload, createPost, getImage ,getPostFeed};
+    const {email} = req.body
+
+    const posts = await postModel.find({email: email })
+
+    const enrPosts = await Promise.all(posts.map(async (post) =>{
+            if (!post.imageId) return post;
+
+            const chunks = [];
+            const stream = bucket.openDownloadStream(post.imageId);
+
+            return new Promise((resolve,reject) => {
+                stream.on('data',(chunk) => chunks.push(chunk));
+                stream.on('error',(err) => reject(err));
+                stream.on('end',() =>{
+                    const fileBuffer = Buffer.concat(chunks);
+                    const fileBase64 = fileBuffer.toString('base64');
+
+                    resolve({
+                        ...post.toObject(),
+                        file : fileBase64
+                    });
+                });
+            });
+        }));
+        res.status(200).json(enrPosts);
+
+
+  } catch (error){
+    console.log("error retrieving your posts:",error);
+    res.status(500).json({message:"server error",error:error.message})
+  };
+
+};
+
+
+module.exports = { upload, createPost, getImage ,getPostFeed,getMyPosts};
