@@ -44,8 +44,8 @@ export default function App() {
         navigate("/cart",{state:{cart}})
     }
 
-    function goPost(){
-        navigate("/posts",{state:{formData}})
+    function goDash(){
+        navigate("/Dashboard",{state:{formData}})
     }
    
     //search functionality
@@ -199,7 +199,7 @@ export default function App() {
                         signUp = {goSign}
                         cart={goCart}
                         render={renderSearch}
-                        post={goPost}
+                        dash={goDash}
                         formData={formData}
                     />
                 </section>}

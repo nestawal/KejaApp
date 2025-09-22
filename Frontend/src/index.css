@@ -337,6 +337,26 @@ form p a{
   display: none;
 }
 
+.Dashboard{
+  display: flex;
+  flex-direction: row;
+  justify-content: center; 
+  align-items: center;
+  gap: 5px;
+}
+
+.dashComp{
+  min-width: 250px;
+  max-width: 250px;
+  min-height: 150px;
+  max-height: 150px;
+  border-radius: 9px;
+  margin-bottom: 9px;
+  background-color: #918E9B;
+  display: grid;
+  place-items: center;
+}
+
 
 
 /* Smartphones (portrait and landscape) */

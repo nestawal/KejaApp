@@ -177,6 +177,7 @@ const getMyPosts = async (req,res) => {
     });
 
     const {email} = req.body
+    console.log(email);
 
     const posts = await postModel.find({email: email })
 

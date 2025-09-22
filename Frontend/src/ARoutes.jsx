@@ -7,6 +7,7 @@ import Login from "./Login.jsx"
 import MyPosts from './MyPosts.jsx';
 import AddPost from './AddPost.jsx';
 import PostInfo from './postInfo.jsx';
+import Dashboard from './Dashboard.jsx';
 import admin from './admin.jsx';
 
 
@@ -23,6 +24,7 @@ export default function ARoutes() {
         <Route path="/posts/:id" element={<PostInfo />}/>
         <Route path="/addPost" element={<AddPost />}/>
         <Route path="/admin" element={<admin />}/>
+        <Route path="/Dashboard" element={<Dashboard/>}/>
       </Routes>
       </Suspense>
     </Router>

@@ -1,6 +1,7 @@
 import {React,useState,useEffect} from "react"
 import {useLocation,useNavigate} from "react-router-dom"
 import NewCard from "./components/newCard.jsx"
+import axios from "axios"
 
 export default function MyPosts(){
     const navigate = useNavigate()
@@ -12,39 +13,36 @@ export default function MyPosts(){
 
     const fetchMyposts = async(req,res) =>{
         try{
-            const response = await fetch("http://localhost:3001/Post/feed",{
-                email: formData.email
-            })
-            const data = await response.json();
-            console.log(data);
-            setPosts(data)
+            const response = await axios.post("http://localhost:3001/Post/yourPosts",{email: formData.email })
+
+            await console.log(response.data);
+            setPosts(response.data);
         }
-        catch(err) {
-            setError(err.message); 
+        catch(err) { 
             console.error("Error fetching data:", err);
         }
     }
-     useEffect(() => {
-            fetchMyposts(); 
-        }, []);
+    useEffect(() => {
+        fetchMyposts(); 
+    }, []);
     
 
     const [posts,setPosts] = useState([]);
 
 
 
-    const cards = posts.map(item => (
+    const cards = Array.isArray(posts) ? posts.map(item => (
             <NewCard
                 key={item.id}
                 {...item}
                 cart={()=>handleCart(item)}
             />
         )
-    )    
+    ) : null;
     
     function addPostForm(){
         navigate("/addPost",{state:{formData}})
-    }
+    };
 
 
     return(
@@ -55,5 +53,5 @@ export default function MyPosts(){
                 <button onClick={addPostForm}><img src="/src/images/plus.png" alt="add" /></button>
             </section>
         </div>
-    )
+    );
 }

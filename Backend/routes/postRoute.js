@@ -13,6 +13,6 @@ router.get('/image/:id', getImage);
 
 router.get('/feed',getPostFeed);
 
-router.get('/yourPosts',getMyPosts);
+router.post('/yourPosts',getMyPosts);
 
 module.exports = router;
