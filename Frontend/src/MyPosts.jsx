@@ -6,25 +6,30 @@ import axios from "axios"
 export default function MyPosts(){
     const navigate = useNavigate()
     const location = useLocation()
-    const formData = location.state || {};
+    const formData = location.state?.formData || {};
     console.log(formData)
     
     const cart = location.state?.cart || [];
 
-    const fetchMyposts = async(req,res) =>{
-        try{
-            const response = await axios.post("http://localhost:3001/Post/yourPosts",{email: formData.email })
-
-            await console.log(response.data);
+    console.log("Before function",formData.email);
+    const fetchMyposts = () =>{
+        console.log("Inside function",formData.email)
+       
+        axios.post("http://localhost:3001/Post/yourPosts",{email: formData.email })
+        .then((response)=>{
+            console.log(response.data);
             setPosts(response.data);
-        }
-        catch(err) { 
-            console.error("Error fetching data:", err);
-        }
+        })
+        .catch(err => console.log("Error fetching data:", err));
     }
     useEffect(() => {
-        fetchMyposts(); 
-    }, []);
+        setTimeout(() => {
+        console.log(" After timeout - formData.email:", formData.email);
+        if (formData.email) {
+            fetchMyposts();
+        }
+        }, 100);
+    }, [formData.email]);
     
 
     const [posts,setPosts] = useState([]);
