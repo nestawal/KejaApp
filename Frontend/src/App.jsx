@@ -11,6 +11,7 @@ export default function App() {
     const navigate = useNavigate()
     const location = useLocation();
     const formData = location.state?.user || {};
+    const url = "http://localhost:3001"
 
 
     useEffect(()=>{
@@ -90,7 +91,7 @@ export default function App() {
     const fetchData = async () => {
         try {
             setLoading(true); 
-            const response = await fetch("http://localhost:3001/Post/feed");
+            const response = await fetch(`${url}/Post/feed`);
             const data = await response.json();
             console.log(data);
             setDataNew(data); 

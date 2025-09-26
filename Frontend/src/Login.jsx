@@ -6,6 +6,7 @@ import { useRef } from 'react';
 
 export  default function Login(){
 const navigate = useNavigate()
+const url = "http://localhost:3001"
   
 
 const [formData,setFormData] = useState({
@@ -29,7 +30,7 @@ const goHome = () => {
 
 function handleSubmit(event){
   event.preventDefault()
-  axios.post("http://localhost:3001/identities/login",{
+  axios.post(`${url}/identities/login`,{
     name : formData.name,
     email: formData.email,
     password: formData.password

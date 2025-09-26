@@ -4,7 +4,7 @@ app.use('/uploads',express.static("uploads"));
 const { GridFSBucket } = require('mongodb');
 const multer = require('multer');
 const path = require('path');
-const postModel = require("../models/postModel.js");
+const postModel = require("../schemas/postModel.js");
 const mongoose = require('mongoose');
 const fs = require('fs');
 //const aws = require('aws-sdk');

@@ -1,6 +1,6 @@
-const idmodel = "../models/identityModel";
+const idmodel = "../schemas/identityModel";
 const Identitymodel = require(idmodel);
-const Cart = require("../models/cartModel");
+const Cart = require("../schemas/cartModel");
 
 
 

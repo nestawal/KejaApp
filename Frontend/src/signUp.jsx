@@ -6,6 +6,7 @@ import axios from "axios"
 export  default function Signup(){
 
   const navigate = useNavigate()
+  const url = "http://localhost:3001"
  
 const [formData,setFormData] = useState({
   name:"",
@@ -25,7 +26,7 @@ console.log(formData)
 
 function handleSubmit(e){
   e.preventDefault()
-  axios.post("http://localhost:3001/identities/signup",{
+  axios.post(`${url}/identities/signup`,{
     name : formData.name,
     email: formData.email,
     password: formData.password

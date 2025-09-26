@@ -8,6 +8,7 @@ export default function MyPosts(){
     const location = useLocation()
     const formData = location.state?.formData || {};
     console.log(formData)
+    const url = "http://localhost:3001"
     
     const cart = location.state?.cart || [];
 
@@ -15,7 +16,7 @@ export default function MyPosts(){
     const fetchMyposts = () =>{
         console.log("Inside function",formData.email)
        
-        axios.post("http://localhost:3001/Post/yourPosts",{email: formData.email })
+        axios.post(`${url}/Post/yourPosts`,{email: formData.email })
         .then((response)=>{
             console.log(response.data);
             setPosts(response.data);
@@ -30,6 +31,7 @@ export default function MyPosts(){
         }
         }, 100);
     }, [formData.email]);
+    //TODO : will change the post cards format later
     
 
     const [posts,setPosts] = useState([]);
