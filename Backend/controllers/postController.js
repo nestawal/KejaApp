@@ -7,6 +7,7 @@ const path = require('path');
 const postModel = require("../schemas/postModel.js");
 const mongoose = require('mongoose');
 const fs = require('fs');
+const request = require("../schemas/requestModels.js");
 //const aws = require('aws-sdk');
 
 
@@ -78,11 +79,16 @@ const createPost = async (req, res) => {
         });
 
         await newPost.save();
+
+        const newReqsec = await request.create({
+          postId : newPost._id
+        })
         
         if (!res.headersSent) {
           res.status(201).json({
             message: 'Post created successfully',
-            post: newPost
+            post: newPost,
+            reqSec: newReqsec
           });
         }
       } catch (err) {

@@ -10,11 +10,13 @@ const Database = require('./database.js');
 const identityRoute = require("./routes/identityRoute.js");
 const postRoute = require("./routes/postRoute.js");
 const cartRoute = require("./routes/cartRoute.js");
+const reqRoute = require("./routes/requestRoute.js")
 
 
 app.use('/identities',identityRoute)
 app.use("/Post",postRoute)
 app.use("/Cart",cartRoute)
+app.use("/requests",reqRoute)
 
 
 mongoose.connect(Database)

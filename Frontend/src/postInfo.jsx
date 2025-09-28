@@ -14,6 +14,15 @@ export default function PostInfo(){
     },[id]);
 
 
+    /**
+     * TODAY'S WORK
+     * instaed of creating multiple pages use this page 
+     * have request table
+     * money spent/earnt section
+     * rented to who section also
+     * lease section also
+     */
+
     if(!post){
         return <div>Loading post ...</div>
     }
