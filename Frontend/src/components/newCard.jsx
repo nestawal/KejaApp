@@ -1,7 +1,8 @@
 import React,{useState} from "react"
-import { Link } from "react-router-dom"
+import { Link,useNavigate } from "react-router-dom"
 
 const NewCard =(props) => {
+    const navigate = useNavigate();
     console.log(props)
     console.log(props.id);
     console.log(props.postLogOnly)
@@ -47,7 +48,7 @@ const NewCard =(props) => {
             </p>
             <div>
                 {props.postLogOnly && <button onClick={weka}>{isListed ? "Listed":"List"}</button> }
-                <Link to={`/posts/${props.id}`}><button>...</button></Link>
+                <button onClick={navigate(`/posts/${props.id}`)}>...</button>
                 <button>request</button>
             </div>
             

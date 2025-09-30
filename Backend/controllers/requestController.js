@@ -1,8 +1,6 @@
 const express = require("express");
 const reqModel = require("../schemas/requestModels.js");
 const postModel = require("../schemas/postModel.js");
-const mongoose = require("mongoose")
-const { ObjectId } = require('mongodb');
 
 
 
@@ -60,5 +58,36 @@ const createNewReq = async(req,res)=>{
     }
 }
 
+const acceptReq=async(req,res)=>{
+    try{
+        const postId = req.body.postId;
+        const months = req.body.months;
+        const acceptedUserId = req.body.acceptedUserId;
+        
+
+        const newUpdate = {
+            leased : true,
+            accepted :{
+                acceptedUserId : acceptedUserId,
+                months : months,
+                date : Date.now()
+            }
+        }
+        console.log(newUpdate);
+
+        const result = await reqModel.updateOne({postId:postId},newUpdate);
+
+        res.status(200).json({message:"succesful update",result});
+        if(result.modifiedCount > 0){
+            console.log("Succesfully updated")
+        }else{
+            console.log("failed update")
+        }
+        
+    }catch(e){
+        console.error("this error occured:",e);
+        res.status(500).json({error:"failed to update pending "})
+    }
+}
 //create endpoint to get pending usesrs/accepted users
-module.exports = {givePostrequest,createNewReq};
+module.exports = {givePostrequest,createNewReq,acceptReq};

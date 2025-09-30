@@ -3,6 +3,7 @@ import data from "./data.js"
 import { useParams } from "react-router-dom";
 
 export default function PostInfo(){
+     const formData = location.state || {};
     const {id} = useParams();
     const [post,setPost] = useState(null);
 
@@ -12,6 +13,11 @@ export default function PostInfo(){
         console.log(foundPost);
         setPost(foundPost);
     },[id]);
+
+
+    const findPost = async() =>{
+        const
+    }
 
 
     /**

@@ -217,5 +217,46 @@ const getMyPosts = async (req,res) => {
 
 };
 
+const getPostwithId=async(req,res)=>{
+  try {
+  const conn = mongoose.connection;
+  const bucket = new GridFSBucket(conn.db, {
+    bucketName: 'uploads'
+  });
 
-module.exports = { upload, createPost, getImage ,getPostFeed,getMyPosts};
+  const { id } = req.body;
+  const post = await postModel.findOne({ _id: id });
+
+  if (!post || !post.imageId) {
+    return res.status(200).json(post);
+  }
+
+  const chunks = [];
+  const stream = bucket.openDownloadStream(post.imageId);
+
+  stream.on('data', (chunk) => chunks.push(chunk));
+  stream.on('error', (err) => {
+    console.error("Stream error:", err);
+    return res.status(500).json({ message: "Error reading file from GridFS", error: err.message });
+  });
+
+  stream.on('end', () => {
+    const fileBuffer = Buffer.concat(chunks);
+    const fileBase64 = fileBuffer.toString('base64');
+
+    const enrichedPost = {
+      ...(typeof post.toObject === 'function' ? post.toObject() : post),
+      file: fileBase64
+    };
+
+    res.status(200).json(enrichedPost);
+  });
+
+} catch (error) {
+  console.error("Error retrieving your post:", error);
+  res.status(500).json({ message: "Server error", error: error.message });
+}
+
+}
+
+module.exports = { upload, createPost, getImage ,getPostFeed,getMyPosts,getPostwithId};

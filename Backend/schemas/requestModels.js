@@ -12,6 +12,7 @@ const requestSchema = mongoose.Schema(
         }],
 
         accepted: {
+
             acceptedUserId: {type: mongoose.Schema.Types.ObjectId},
             months: {type: Number},
             date :{type: Date}

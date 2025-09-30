@@ -149,6 +149,7 @@ export default function App() {
                 key={item.id}
                 cart={()=>handleCart(item)}
                 postLogOnly = {postLogOnly}
+                formData = {formData}
                 
             />
         )
