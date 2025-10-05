@@ -4,7 +4,7 @@ import { Link,useNavigate } from "react-router-dom"
 const NewCard =(props) => {
     const navigate = useNavigate();
     console.log(props)
-    console.log(props.id);
+    console.log(props._id);
     console.log(props.postLogOnly)
 
     let badgeText;
@@ -22,6 +22,8 @@ const NewCard =(props) => {
         }
     
     } 
+
+    const userStatus = props.isAdmin
 
 
 
@@ -44,12 +46,12 @@ const NewCard =(props) => {
             </div>
             <p className="card--title">{props.title}</p>
             <p className="card--price">
-                <span className="bold">From ksh{props.price}</span> / person
+                <span className="bold"><strong>ksh{props.price}</strong></span>
             </p>
             <div>
                 {props.postLogOnly && <button onClick={weka}>{isListed ? "Listed":"List"}</button> }
-                <button onClick={navigate(`/posts/${props.id}`)}>...</button>
-                <button>request</button>
+                <button onClick={()=>{userStatus === true ? navigate(`/posts/agent/${props._id}`) : navigate(`/posts/${props._id}`)}}>...</button>
+                {userStatus === false && <button>request</button>}
             </div>
             
         </div>

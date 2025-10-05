@@ -90,4 +90,16 @@ const acceptReq=async(req,res)=>{
     }
 }
 //create endpoint to get pending usesrs/accepted users
-module.exports = {givePostrequest,createNewReq,acceptReq};
+const getRequestById=async(req,res)=>{
+   try{
+     const {id} = req.params
+
+    const requestedId = await reqModel.findOne({postId : id});
+
+    res.status(200).json({requestedId});
+   }catch(err){
+        console.error("this error occured:",err);
+        res.status(500).json({error:"failed to get request "})
+   }
+}
+module.exports = {givePostrequest,createNewReq,acceptReq,getRequestById};

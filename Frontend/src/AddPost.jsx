@@ -122,7 +122,7 @@ export default function AddPost(){
                         <i className="fa-solid fa-envelope"></i>
                         <input
                         type="text" 
-                        placeholder="City,Country(Start each with a capital letter)" 
+                        placeholder="Place,City(Start each with a capital letter)" 
                         name="location"
                         onChange = {handleChange}
                         value={postForm.location}

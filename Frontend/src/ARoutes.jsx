@@ -8,8 +8,7 @@ import MyPosts from './MyPosts.jsx';
 import AddPost from './AddPost.jsx';
 import PostInfo from './postInfo.jsx';
 import Dashboard from './Dashboard.jsx';
-import admin from './admin.jsx';
-
+import AgentPostInfo from './agentPostInfo.jsx'
 
 export default function ARoutes() {
   return (
@@ -22,6 +21,7 @@ export default function ARoutes() {
         <Route path="/cart" element={<Cart />}/>
         <Route path="/posts" element={<MyPosts />}/>
         <Route path="/posts/:id" element={<PostInfo />}/>
+        <Route path="/posts/agent/:id" element={<AgentPostInfo />}/>
         <Route path="/addPost" element={<AddPost />}/>
         <Route path="/admin" element={<admin />}/>
         <Route path="/Dashboard" element={<Dashboard/>}/>

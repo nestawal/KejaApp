@@ -12,6 +12,9 @@ export default function MyPosts(){
     
     const cart = location.state?.cart || [];
 
+    const postLogOnly = false ;
+    console.log(postLogOnly);
+
     console.log("Before function",formData.email);
     const fetchMyposts = () =>{
         console.log("Inside function",formData.email)
@@ -35,17 +38,35 @@ export default function MyPosts(){
     
 
     const [posts,setPosts] = useState([]);
+    console.log(posts);
+    /*handle cart prperly to backend
+    const[cart,setCart]= useState([])
+        function handleCart(newItem){
+                setCart(prev=>[
+                    ...prev,
+                    newItem
+                ])
+            
+        }
+        console.log(cart);
+*/
 
 
-
-    const cards = Array.isArray(posts) ? posts.map(item => (
+    const cards = posts.map(item => (
             <NewCard
-                key={item.id}
+               key={item._id}
                 {...item}
-                cart={()=>handleCart(item)}
+                postLogOnly = {postLogOnly}
+                //cart={()=>handleCart(item)}
+                file={item.file}
+                description={item.posts.description}
+                price={item.posts.price}
+                title={item.posts.name}
+                location={item.posts.location}
+                isAdmin = {true}
             />
         )
-    ) : null;
+    );
     
     function addPostForm(){
         navigate("/addPost",{state:{formData}})

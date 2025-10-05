@@ -149,7 +149,7 @@ export default function App() {
                 key={item.id}
                 cart={()=>handleCart(item)}
                 postLogOnly = {postLogOnly}
-                formData = {formData}
+                
                 
             />
         )
@@ -159,7 +159,7 @@ export default function App() {
 
      const newCards = dataNew.map(item => (
              <NewCard
-                key={item.id}
+                key={item._id}
                 {...item}
                 postLogOnly = {postLogOnly}
                 cart={()=>handleCart(item)}

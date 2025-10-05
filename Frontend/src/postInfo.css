@@ -3,9 +3,9 @@
 }
 
 .postInfo{
-    width: fit-content;
-    margin: 0 auto;
+    width: 100%;
     display: flex;
+    flex-direction: column;
 }
 
 .postDetails{
@@ -16,4 +16,35 @@
 .detButtons{
     display: flex;
     align-content: space-between;
+}
+
+.postInfo--profile{
+     width: 35%;
+    margin: 0 auto;
+    display: flex;
+    background-color: lightgreen;
+}
+
+.postInfo--details{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+.postInfo--choice{
+    width: 45%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+
+}
+
+.postInfo--choice button{
+    border: 0cap;
+    background-color: lightsteelblue;
+    font-size: 26px;
+}
+
+.postInfo--choice button:focus{
+    background-color: lightgreen;
 }

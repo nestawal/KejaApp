@@ -24,6 +24,10 @@ const PostSchema = mongoose.Schema(
             location: {
                 type: String,
                 required: true
+            },
+            status: {
+                type: Boolean,
+                default: false
             }
              
         }

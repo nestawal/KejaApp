@@ -44,11 +44,11 @@ const Card =(props) => {
             </div>
             <p className="card--title">{props.title}</p>
             <p className="card--price">
-                <span className="bold">From ksh{props.price}</span> / person
+                <span className="bold"><strong>ksh{props.price}</strong></span>
             </p>
             <div>
                 {props.postLogOnly && <button onClick={weka}>{isListed ? "Listed":"List"}</button> }
-                <button onClick={navigate(`/posts/${props.id}`)}>...</button>
+                <button onClick={()=>navigate(`/posts/${props.id}`)}>...</button>
                 <button>request</button>
             </div>
             

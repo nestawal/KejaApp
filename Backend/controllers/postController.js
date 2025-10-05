@@ -224,7 +224,8 @@ const getPostwithId=async(req,res)=>{
     bucketName: 'uploads'
   });
 
-  const { id } = req.body;
+  const { id } = req.params;
+  console.log(id);
   const post = await postModel.findOne({ _id: id });
 
   if (!post || !post.imageId) {

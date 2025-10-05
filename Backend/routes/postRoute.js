@@ -15,7 +15,7 @@ router.get('/feed',getPostFeed);
 
 router.post('/yourPosts',getMyPosts);
 
-router.get('/getPostWithId',getPostwithId);
+router.get('/:id',getPostwithId);
 
 //write get post
 
