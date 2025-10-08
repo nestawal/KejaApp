@@ -8,12 +8,14 @@ const requestSchema = mongoose.Schema(
         pending:[{
             pendingUserId : {type: mongoose.Schema.Types.ObjectId},
             months: {type: Number},
-            date :{type: Date, default:Date.now}
+            date :{type: Date, default:Date.now},
+            name:{type: String}
         }],
 
         accepted: {
 
             acceptedUserId: {type: mongoose.Schema.Types.ObjectId},
+            acceptedUserName:{type: String},
             months: {type: Number},
             date :{type: Date}
         },

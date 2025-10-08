@@ -48,3 +48,32 @@
 .postInfo--choice button:focus{
     background-color: lightgreen;
 }
+
+.infotable{
+    font-size: 25px;
+    width: 75%;
+    margin: 0 auto;
+    border-spacing: 30px 10px;
+    background-color: grey;
+    border-radius: 1cap;
+}
+
+.infotable thead{
+    text-decoration: underline;
+}
+
+.infotable td,th{
+    text-align: center;
+}
+
+.infotable td,th button{
+    border-radius: 50%;
+}
+
+.deny{
+    background-color: brown;
+}
+
+.accept{
+    background-color: aquamarine;
+}

@@ -57,10 +57,26 @@ const isAdmin=(req,res)=>{
     .catch(err => res.json(err))
 };
 
+//useless function,ignore
+const getNameForId = async(req,res)=>{
+    try{
+        const {id} = req.params
+
+        await Identitymodel.findOne({_id: id})
+            .then(data=>{
+                res.status(200).json(data.name)
+            })
+    }catch(err){
+        console.error("this error occured:",err);
+        res.status(500).json({error:"failed to get request "})
+    }
+}
+
 
 
 module.exports = {
     createIdentity,
     checkIdentity,
-    isAdmin
+    isAdmin,
+    getNameForId
 };

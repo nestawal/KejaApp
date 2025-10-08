@@ -12,7 +12,10 @@ export default function AgentPostInfo(){
     const {id} = useParams();
     const [post,setPost] = useState(null);
     const [Record,SetRecord] = useState("requests");
-    const [requestInfo,setRequestInfo] = useState();
+    const [postInfo,setPostInfo] = useState();
+    const [requestInfo,setRequestInfo] = useState([]);
+    console.log(requestInfo);
+    
     const url = "http://localhost:3001"
 
     useEffect(()=>{
@@ -24,17 +27,38 @@ export default function AgentPostInfo(){
            
         try{     
           
-        const postResult = await axios.get(`${url}/Post/${id}`);
-        setPost(postResult.data);
-        console.log("Post data set:", postResult.data);
+       
+        await axios.get(`${url}/Post/${id}`)
+            .then(result=>{
+                const data = result.data
+                console.log(data)
+                setPost(data)
+            })
+
+        await axios.get(`${url}/requests/${id}`)
+            .then(result=>{
+                const data = result.data
+                console.log("This is the pending:",data.requestedId.pending)
+                setRequestInfo(prevState => {
+                    const newState = data.requestedId.pending
+                    console.log("Setting new state:", newState)
+                    return newState
+                })
+                setPostInfo(prev=>{
+                    const newState = data.requestedId
+                    console.log("new postInfo:",newState)
+                    return newState
+                })
+                console.log(requestInfo)
+                console.log(requestInfo?.leased);
+            })
+
+        
 
        
-        const requestResult = await axios.get(`${url}/requests/${id}`); 
-        setRequestInfo(requestResult.data);
-        console.log("Request info set:", requestResult.data);
 
         } catch (error) {
-            // Handle network or API errors here
+            
             console.error("Error fetching data:", error);
         }
            
@@ -45,6 +69,15 @@ export default function AgentPostInfo(){
         
 
     },[id]);
+
+
+
+    useEffect(() => {
+    // This runs AFTER the state has been successfully updated by React
+    if (requestInfo && requestInfo.pending) {
+        console.log("requestInfo state is now updated:", requestInfo.pending);
+    }
+}, [requestInfo]);
 
     
 
@@ -92,7 +125,11 @@ export default function AgentPostInfo(){
                 <button onClick={()=>recordChoice("Accepted")}>accepted</button>
                 <button onClick={()=>recordChoice("Payments")}>payments</button>
             </div>
-            {Record === "Requests"&& <Requests/>}
+            {Record === "Requests"&& 
+            <Requests
+                info={requestInfo}
+                postInfo={postInfo}
+            />}
             {Record === "Accepted"&& <Accepted/>}
             {Record === "Payments"&& <Payments/>}
             

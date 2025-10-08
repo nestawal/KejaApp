@@ -1,6 +1,7 @@
 const express = require("express");
 const reqModel = require("../schemas/requestModels.js");
 const postModel = require("../schemas/postModel.js");
+const idModel = require("../schemas/identityModel.js")
 
 
 
@@ -28,16 +29,24 @@ const createNewReq = async(req,res)=>{
     try{
         const postId =req.body.postId
         const personId =req.body.personId
-        const months = req.months
+        const months = req.body.months
+        let name
         console.log('postId:', postId, 'Length:', postId?.length);
 
 
         const doc = await reqModel.findOne({ postId: postId });
         console.log("Matched doc:", doc);
 
+        await  idModel.findOne({_id: personId})
+            .then(data=>{
+                name = data.name
+                console.log(name);
+            })
+
         const newPending ={
-            pendingUserid : personId,
-            months : months
+            pendingUserId : personId,
+            months : months,
+            name: name
         }
 
         const result = await reqModel.updateOne(
