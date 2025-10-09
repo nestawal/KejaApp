@@ -113,11 +113,8 @@ export default function AgentPostInfo(){
                 <div className="postInfo--details">
                     <div>{post.posts.name}</div>
                     <div><strong>rooms:</strong>{post.posts.rooms}</div>
-                    <div>ksh {post.posts.price}</div>
-                    <div className="detButtons">
-                        <button>Rent</button>
-                        <button>List</button>
-                    </div>
+                    <div>ksh {post.posts.price} p/m</div>
+                    <div><strong>Location:</strong>{post.posts.location}</div>
                 </div>
             </div>
             <div className="postInfo--choice">
@@ -130,7 +127,10 @@ export default function AgentPostInfo(){
                 info={requestInfo}
                 postInfo={postInfo}
             />}
-            {Record === "Accepted"&& <Accepted/>}
+            {Record === "Accepted"&& 
+            <Accepted
+                 postInfo={postInfo}
+            />}
             {Record === "Payments"&& <Payments/>}
             
         </div>

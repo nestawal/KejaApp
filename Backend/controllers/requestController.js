@@ -72,6 +72,7 @@ const acceptReq=async(req,res)=>{
         const postId = req.body.postId;
         const months = req.body.months;
         const acceptedUserId = req.body.acceptedUserId;
+        const acceptedUserName = req.body.acceptedUserName;
         
 
         const newUpdate = {
@@ -79,7 +80,8 @@ const acceptReq=async(req,res)=>{
             accepted :{
                 acceptedUserId : acceptedUserId,
                 months : months,
-                date : Date.now()
+                date : Date.now(),
+                acceptedUserName: acceptedUserName
             }
         }
         console.log(newUpdate);
