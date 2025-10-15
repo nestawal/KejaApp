@@ -9,6 +9,8 @@ import AddPost from './AddPost.jsx';
 import PostInfo from './postInfo.jsx';
 import Dashboard from './Dashboard.jsx';
 import AgentPostInfo from './agentPostInfo.jsx'
+import Lease from './lease.jsx';
+import LeaseRequestSent from './leaseRequestSent.jsx';
 
 export default function ARoutes() {
   return (
@@ -25,6 +27,8 @@ export default function ARoutes() {
         <Route path="/addPost" element={<AddPost />}/>
         <Route path="/admin" element={<admin />}/>
         <Route path="/Dashboard" element={<Dashboard/>}/>
+        <Route path="/request/:id" element={<Lease/>}/>
+        <Route path="/requestSent" element={<LeaseRequestSent/>}/>
       </Routes>
       </Suspense>
     </Router>

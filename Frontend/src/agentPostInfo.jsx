@@ -19,10 +19,6 @@ export default function AgentPostInfo(){
     const url = "http://localhost:3001"
 
     useEffect(()=>{
-        /*const foundPost = data.find(p=> p.id === Number(id));
-        //we will change this from the dummy data to dynamic when we are done
-        console.log(foundPost);
-        setPost(foundPost);*/
         const findPost = async() =>{
            
         try{     

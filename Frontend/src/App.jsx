@@ -168,6 +168,7 @@ export default function App() {
                 price={item.posts.price}
                 title={item.posts.name}
                 location={item.posts.location}
+                formData={formData}
 
             />
         )
