@@ -2,7 +2,8 @@ const express = require("express");
 const reqModel = require("../schemas/requestModels.js");
 const postModel = require("../schemas/postModel.js");
 const idModel = require("../schemas/identityModel.js")
-
+const reqRecModel = require("../schemas/reqRecModel.js")
+const mongoose = require("mongoose")
 
 
 async function givePostrequest(req,res){
@@ -30,18 +31,14 @@ const createNewReq = async(req,res)=>{
         const postId =req.body.postId
         const personId =req.body.personId
         const months = req.body.months
-        let name
+        const name = req.body.name
         console.log('postId:', postId, 'Length:', postId?.length);
 
 
         const doc = await reqModel.findOne({ postId: postId });
         console.log("Matched doc:", doc);
 
-        await  idModel.findOne({_id: personId})
-            .then(data=>{
-                name = data.name
-                console.log(name);
-            })
+        
 
         const newPending ={
             pendingUserId : personId,
@@ -54,6 +51,26 @@ const createNewReq = async(req,res)=>{
             {$push : {pending: newPending}}
         );
 
+        const reqPost = new mongoose.Types.ObjectId(postId)
+
+        let reqRec = await reqRecModel.findOne({personId : personId})
+
+        if(!reqRec){
+            reqRec = await reqRecModel.create({
+            personId : personId,
+            personEmail : name,
+            requests : [{reqPost}]
+        })
+        }
+        else{
+            reqRec = await reqRecModel.findByIdAndUpdate(
+            personId,
+            {$push : {requests : reqPost }},
+            {new: true}
+        )
+        }
+        
+
         res.status(200).json({message:"succesful update",result});
         if(result.modifiedCount > 0){
             console.log("Succesfully updated")
@@ -64,6 +81,19 @@ const createNewReq = async(req,res)=>{
     }catch(err){
         console.error("this error occured:",err);
         res.status(500).json({error:"failed to update pending "})
+    }
+}
+
+const returnReqRec = async(req,res)=>{
+    try{
+        const {id} = req.params
+
+        const myReqRec = await reqRecModel.findOne({personId : id})
+
+        res.status(200).json({myReqRec});
+    }catch(err){
+        console.error("this error occured:",err);
+        res.status(500).json({error:"failed to get request "})
     }
 }
 
@@ -113,4 +143,4 @@ const getRequestById=async(req,res)=>{
         res.status(500).json({error:"failed to get request "})
    }
 }
-module.exports = {givePostrequest,createNewReq,acceptReq,getRequestById};
+module.exports = {givePostrequest,createNewReq,acceptReq,getRequestById,returnReqRec};

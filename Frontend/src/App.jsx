@@ -10,7 +10,8 @@ import NewCard from "./components/newCard.jsx"
 export default function App() {
     const navigate = useNavigate()
     const location = useLocation();
-    const formData = location.state?.user || {};
+    const formData = location.state?.user || location.state?.formData || {};
+    console.log(formData)
     const url = "http://localhost:3001"
 
 

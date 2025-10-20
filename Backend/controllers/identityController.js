@@ -1,6 +1,7 @@
 const idmodel = "../schemas/identityModel";
 const Identitymodel = require(idmodel);
 const Cart = require("../schemas/cartModel");
+const reqRec = require("../schemas/reqRecModel")
 
 
 
@@ -15,10 +16,20 @@ const createIdentity = async(req,res) =>{
             items: []
         })
 
+        const newReqRec = await reqRec.create({
+            personId : newId._id,
+            personName : newId.name,
+            requests: []
+        })
+
+        await newReqRec.save();
+
         res.json({
             user: newId,
             cart: newCart
         })
+
+        
     }
     catch(err){  res.status(500).json({ error: err.message });}
 };

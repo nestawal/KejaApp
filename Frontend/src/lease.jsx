@@ -63,10 +63,11 @@ export default function Lease(){
             axios.patch(`${url}/requests/addNewreq`,{
                 postId : newReq.postId,
                 personId : newReq.personId,
-                months : newReq.months
+                months : newReq.months,
+                name : formData.name
             })
             .then(result=>{console.log(result)
-                navigate("/requestSent")
+                navigate("/requestSent",{state:{formData : formData}})
             })
             .catch(error=>console.log(error))
         }

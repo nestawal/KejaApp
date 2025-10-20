@@ -1,7 +1,10 @@
-import { useNavigate } from "react-router-dom"
+import { useNavigate,useLocation } from "react-router-dom"
 
 export default function  LeaseRequestSent(){
     const navigate = useNavigate();
+    const location = useLocation();
+    const formData = location.state?.formData;
+    console.log(formData)
 
     return(
         <div>
@@ -13,7 +16,7 @@ export default function  LeaseRequestSent(){
                 <strong>please don't send another request on this prperty</strong>
             </p>
 
-            <button onClick={()=>navigate("/")}>Go Back to homepage</button>
+            <button onClick={()=>navigate("/",{state:{formData : formData}})}>Go Back to homepage</button>
         </div>
     )
 }

@@ -32,7 +32,7 @@ function handleSubmit(e){
     password: formData.password
   })
   .then(result=>{console.log(result)
-    navigate("/",{state: {formData}})
+    navigate("/",{state: {user: formData}})
   })
   .catch(error=>console.log(error))
 
