@@ -52,6 +52,7 @@ const NewCard =(props) => {
                 {props.postLogOnly && <button onClick={weka}>{isListed ? "Listed":"List"}</button> }
                 <button onClick={()=>{userStatus === true ? navigate(`/posts/agent/${props._id}`) : navigate(`/posts/${props._id}`)}}>...</button>
                 {!userStatus && <button onClick={()=>navigate(`/request/${props._id}`,{state:{formData : props.formData}})}>request</button>}
+                {props.canIpay && <button>Pay</button>}
             </div>
             
         </div>

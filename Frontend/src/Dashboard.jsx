@@ -5,6 +5,7 @@ export default function Dashboard(){
     const navigate = useNavigate();
 
     const formData = location.state || {};
+    console.log(formData)
 
     function goToComp(s){
         navigate(`/${s}`,{state: {formData}})
@@ -13,7 +14,7 @@ export default function Dashboard(){
     return(
         <div className="Dashboard">
             <div className="dashComp" onClick={() => goToComp("posts")}>Myposts</div>
-            <div  className="dashComp">Requested</div>
+            <div  className="dashComp" onClick={() => goToComp("myRequests")}>Requested</div>
             <div  className="dashComp">Leased</div>
             <div  className="dashComp">Cash Record</div>
         </div>
