@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require("mongoose");
 const cors = require("cors");
+const ngrok = require('ngrok');
+
 
 const app = express();
 app.use(express.json());
@@ -12,6 +14,10 @@ const postRoute = require("./routes/postRoute.js");
 const cartRoute = require("./routes/cartRoute.js");
 const axios = require('axios');
 const moment = require('moment');
+const reqRecModel = require("./schemas/reqRecModel.js")
+const transaction = require("./schemas/transactionModel.js")
+const reqModel = require("./schemas/requestModels.js")
+const postModel = require("./schemas/postModel.js")
 
 
 
@@ -21,7 +27,8 @@ const consumerKey = 'WUbn6Un5dIg6ctcWTALwt4mlGDl0SF60mmjOjn98YBtGwRai';
 const consumerSecret = 'VtyqabkzT2dfLLEjBk5sAi3wDH8Hjpt5I9s6qPjn279n99inXHellJjo5HO7oonC';
 const shortcode = '174379';
 const passkey = 'YOUR_PASSKEY';
-const callbackURL = 'https://yourdomain.com/callback';
+//always start ngrok before testing
+const callbackURL = ' https://bradley-oscillatory-callie.ngrok-free.dev';
 
 // 1. Generate Access Token
 async function generateToken() {
@@ -35,6 +42,14 @@ async function generateToken() {
 
 // 2. Initiate STK Push
 app.post('/pay', async (req, res) => {
+  //**
+  //in a real app u change phone part to req.body.phone but for a sandbox use fake number 254708374149
+  // this is just simulated to show how real app will work so in the real app change alot but we will use req,body.phone to update transactions
+  //   in req.body,U need:
+  // propertyId
+  // personId
+  // amount
+  // phone*/
   try {
     const token = await generateToken();
     const timestamp = moment().format('YYYYMMDDHHmmss');
@@ -48,11 +63,43 @@ app.post('/pay', async (req, res) => {
       Amount: req.body.amount,
       PartyA: req.body.phone,
       PartyB: shortcode,
-      PhoneNumber: req.body.phone,
+      PhoneNumber: 254708374149,
       CallBackURL: callbackURL,
       AccountReference: req.body.reference || 'BookingApp',
       TransactionDesc: req.body.description || 'Booking Payment'
     };
+
+    const newTransaction = new transaction({
+      propertyId : req.body.propertyId,
+      personId : req.body.personId,
+      amount: req.body.amount,
+      phone: req.body.phone
+    });
+
+    await newTransaction.save();
+    console.log('Transaction saved on initiation');
+
+    // Update property status immediately
+    const post = await reqModel.findOne({ postId: propertyId });
+    if (post) {
+      const  reqRec = await reqRecModel.findByIdAndUpdate(
+            req.body.personId,
+            {$push : {leased : req.body.propertyId}},
+            {new: true}
+          )
+
+      reqRec.save();
+      console.log("lease status on request model table updated")
+
+      post.leased = true;
+      await post.save();
+      console.log(`Property ${req.body.propertyId} marked as leased`);
+
+      const postEmail = await postModel.findOne({_id: req.body.propertyId})
+     
+    } else {
+      console.log('Post not found');
+    }
 
     const response = await axios.post(
       'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest',
@@ -108,4 +155,4 @@ app.post('/status', async (req, res) => {
   }
 });
 
-app.listen(3000, () => console.log('Server running on port 3000'));
+app.listen(3001, () => console.log('Server running on port 3000'));

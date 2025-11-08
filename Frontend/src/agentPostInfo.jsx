@@ -31,7 +31,7 @@ export default function AgentPostInfo(){
                 setPost(data)
             })
 
-        await axios.get(`${url}/requests/${id}`)
+        await axios.get(`${url}/requests/getRequest/${id}`)
             .then(result=>{
                 const data = result.data
                 console.log("This is the pending:",data.requestedId.pending)

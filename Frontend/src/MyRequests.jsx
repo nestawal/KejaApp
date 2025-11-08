@@ -29,6 +29,7 @@ export default function MyRequests(){
         })
         .catch(err => console.log("Error fetching data:", err));
     }
+
     useEffect(() => {
         setTimeout(() => {
         console.log(" After timeout - formData.email:", formData.email);
@@ -66,6 +67,8 @@ export default function MyRequests(){
                 title={item.newPost.posts.name}
                 location={item.newPost.posts.location}
                 isAdmin = {true}
+                personId = {id}
+                propertyId = {item.newPost._id}
                 canIpay = {item.acceptStatus}
             />
         )

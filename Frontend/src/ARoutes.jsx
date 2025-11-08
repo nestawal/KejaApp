@@ -12,6 +12,7 @@ import AgentPostInfo from './agentPostInfo.jsx'
 import Lease from './lease.jsx';
 import LeaseRequestSent from './leaseRequestSent.jsx';
 import MyRequests from './MyRequests.jsx';
+import Pay from './Pay.jsx';
 
 export default function ARoutes() {
   return (
@@ -31,6 +32,7 @@ export default function ARoutes() {
         <Route path="/request/:id" element={<Lease/>}/>
         <Route path="/requestSent" element={<LeaseRequestSent/>}/>
         <Route path="/myRequests" element={<MyRequests/>}/>
+        <Route path="/pay/:propertyId/:personId/:amount" element={<Pay/>}/>
       </Routes>
       </Suspense>
     </Router>

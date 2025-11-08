@@ -5,6 +5,9 @@ const reqRecSchema = mongoose.Schema({
     personName : {type: String},
     requests : [{
         reqPost : {type: mongoose.Schema.Types.ObjectId,ref : 'Posts'}
+    }],
+    leased : [{
+        reqPost : {type: mongoose.Schema.Types.ObjectId,ref : 'Posts'}
     }]
 })
 

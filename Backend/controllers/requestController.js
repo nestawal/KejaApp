@@ -132,7 +132,9 @@ const returnReqRec = async(req,res)=>{
             let postReq = await reqModel.findOne({postId : post._id})
             const message = postReq ? "found the post request" : "post Request  not available ";
             console.log(message);
-            let acceptStatus = postReq.accepted === id ? true : false;
+            let acceptStatus = postReq.accepted.acceptedUserId.toString() === id ? true : false;
+            console.log("the accepted userId id :",postReq.accepted.acceptedUserId)
+            console.log("this is the userId :",id)
             console.log("the status is :",acceptStatus)
 
            let finalPost = ({newPost ,acceptStatus})
@@ -156,7 +158,7 @@ const acceptReq=async(req,res)=>{
         
 
         const newUpdate = {
-            leased : true,
+            
             accepted :{
                 acceptedUserId : acceptedUserId,
                 months : months,

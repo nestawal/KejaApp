@@ -6,6 +6,7 @@ const NewCard =(props) => {
     console.log(props)
     console.log(props._id);
     console.log(props.postLogOnly)
+    console.log(props.canIpay)
 
     let badgeText;
     if (props.openSpots === 0) {
@@ -52,7 +53,7 @@ const NewCard =(props) => {
                 {props.postLogOnly && <button onClick={weka}>{isListed ? "Listed":"List"}</button> }
                 <button onClick={()=>{userStatus === true ? navigate(`/posts/agent/${props._id}`) : navigate(`/posts/${props._id}`)}}>...</button>
                 {!userStatus && <button onClick={()=>navigate(`/request/${props._id}`,{state:{formData : props.formData}})}>request</button>}
-                {props.canIpay && <button>Pay</button>}
+                {props.canIpay && <button onClick={()=>navigate(`/pay/${props.propertyId}/${props.personId}/${props.price}`)}>Pay</button>}
             </div>
             
         </div>
