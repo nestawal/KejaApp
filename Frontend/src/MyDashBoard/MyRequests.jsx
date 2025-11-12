@@ -1,13 +1,16 @@
 import {React,useState,useEffect} from "react"
 import {useLocation,useNavigate} from "react-router-dom"
-import NewCard from "./components/newCard.jsx"
+import NewCard from "../components/newCard.jsx"
 import axios from "axios"
 
-export default function MyPosts(){
+export default function MyRequests(){
     const navigate = useNavigate()
     const location = useLocation()
     const formData = location.state?.formData || {};
+    const [posts,setPosts] = useState([]);
+    console.log(posts);
     console.log(formData)
+    const id = formData._id
     const url = "http://localhost:3001"
     
     const cart = location.state?.cart || [];
@@ -16,29 +19,29 @@ export default function MyPosts(){
     console.log(postLogOnly);
 
     console.log("Before function",formData.email);
-    const fetchMyposts = () =>{
-        console.log("Inside function",formData.email)
+    const fetchMyRequests = () =>{
+        console.log("Inside function",{x: formData.email,y: id})
        
-        axios.post(`${url}/Post/yourPosts`,{email: formData.email })
+        axios.get(`${url}/requests/returnReq/${id}`)
         .then((response)=>{
-            console.log(response.data.enrPosts);
+            console.log(response.data);
             setPosts(response.data);
         })
         .catch(err => console.log("Error fetching data:", err));
     }
+
     useEffect(() => {
         setTimeout(() => {
         console.log(" After timeout - formData.email:", formData.email);
         if (formData.email) {
-            fetchMyposts();
+            fetchMyRequests();
         }
         }, 100);
     }, [formData.email]);
     //TODO : will change the post cards format later
     
 
-    const [posts,setPosts] = useState([]);
-    console.log(posts);
+   
     /*handle cart prperly to backend
     const[cart,setCart]= useState([])
         function handleCart(newItem){
@@ -58,27 +61,27 @@ export default function MyPosts(){
                 {...item}
                 postLogOnly = {postLogOnly}
                 //cart={()=>handleCart(item)}
-                file={item.file}
-                description={item.posts.description}
-                price={item.posts.price}
-                title={item.posts.name}
-                location={item.posts.location}
+                file={item.newPost.file}
+                description={item.newPost.posts.description}
+                price={item.newPost.posts.price}
+                title={item.newPost.posts.name}
+                location={item.newPost.posts.location}
                 isAdmin = {true}
+                personId = {id}
+                propertyId = {item.newPost._id}
+                canIpay = {item.acceptStatus}
             />
         )
     );
     
-    function addPostForm(){
-        navigate("/addPost",{state:{formData}})
-    };
-
+    
 
     return(
         <div>
-            <h1>Your posts</h1>
+            <h1>Your requests</h1>
             <section className="cards-list">
                 {cards}
-                <button onClick={addPostForm}><img src="/src/images/plus.png" alt="add" /></button>
+               
             </section>
         </div>
     );

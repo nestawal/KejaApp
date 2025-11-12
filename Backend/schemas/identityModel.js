@@ -15,7 +15,7 @@ const IdentitySchema = mongoose.Schema(
         },
         agent:{
             type: Boolean,
-            default: false
+            default: true
         },
         password:{
             type : String,

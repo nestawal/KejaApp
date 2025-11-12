@@ -1,5 +1,5 @@
 import {React, useState} from "react";
-import {useLocation} from "react-router-dom"
+import {useLocation,useNavigate} from "react-router-dom"
 import axios from "axios";
 
 
@@ -11,9 +11,11 @@ import axios from "axios";
  */
 
 export default function AddPost(){
+    const navigate = useNavigate();
     const location = useLocation();
     const formData = location.state || {};
-    console.log(formData)
+    console.log(formData.formData.email)
+    console.log(formData.formData)
    
     const [postForm,setPostForm] = useState({
        myFile: "",
@@ -46,13 +48,13 @@ export default function AddPost(){
       
       const fd = new FormData();
 
-      fd.append("file", postForm.myFile);
-      fd.append("email", postForm.email);
-      fd.append("posts[name]", postForm.title);
-      fd.append("posts[description]", postForm.description);
-      fd.append("posts[location]", postForm.location);
-      fd.append("posts[rooms]", postForm.rooms);
-      fd.append("posts[price]", postForm.price);
+      fd.append("image", postForm.myFile);
+      fd.append("email", formData.formData.email);
+      fd.append("name", postForm.title);
+      fd.append("description", postForm.description);
+      fd.append("location", postForm.location);
+      fd.append("rooms", postForm.rooms);
+      fd.append("price", postForm.price);
       
       const res = await axios.post("http://localhost:3001/Post/publish",fd,{
         headers:{
@@ -62,7 +64,7 @@ export default function AddPost(){
 
       console.log("Post created:",res.data);
 
-      navigate("/posts",{ state: { email: postForm.email } });
+      navigate("/",{ state: { formData: formData.formData } });
     
     }
     

@@ -26,15 +26,18 @@ export default function Pay(){
         e.preventDefault();
 
         if(phone){
-            axios.post(`${url}/pay`,{
+            axios.post(`${url}/paySimulate`,{
                 propertyId : propertyId,
                 personId: personId,
                 phone: phone,
+                amount: amount
             })
             .then(result=>{
                 console.log(result)
-                alert("pay succesful you will head back to the homepage now ")
-                .then(navigate(`/`))
+                const userConfirmed = confirm("Payment successful! Click OK to go to homepage,U will ahve to sign up again for security reasons, or Cancel to stay.");
+                if (userConfirmed) {
+                    navigate('/');
+                }
             })
             .catch(error=>console.log(error))
         }

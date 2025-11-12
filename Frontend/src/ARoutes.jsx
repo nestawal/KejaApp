@@ -4,15 +4,16 @@ import Signup from "./signUp.jsx"
 import App from './App.jsx';
 import Cart from "./Cart.jsx"
 import Login from "./Login.jsx"
-import MyPosts from './MyPosts.jsx';
+import MyPosts from './MyDashBoard/MyPosts.jsx';
 import AddPost from './AddPost.jsx';
 import PostInfo from './postInfo.jsx';
-import Dashboard from './Dashboard.jsx';
+import Dashboard from './MyDashBoard/Dashboard.jsx';
 import AgentPostInfo from './agentPostInfo.jsx'
 import Lease from './lease.jsx';
 import LeaseRequestSent from './leaseRequestSent.jsx';
-import MyRequests from './MyRequests.jsx';
+import MyRequests from './MyDashBoard/MyRequests.jsx';
 import Pay from './Pay.jsx';
+import MyLeased from './MyDashBoard/MyLeased.jsx';
 
 export default function ARoutes() {
   return (
@@ -32,6 +33,7 @@ export default function ARoutes() {
         <Route path="/request/:id" element={<Lease/>}/>
         <Route path="/requestSent" element={<LeaseRequestSent/>}/>
         <Route path="/myRequests" element={<MyRequests/>}/>
+        <Route path="/myLeased" element={<MyLeased/>}/>
         <Route path="/pay/:propertyId/:personId/:amount" element={<Pay/>}/>
       </Routes>
       </Suspense>
