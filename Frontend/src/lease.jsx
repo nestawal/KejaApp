@@ -12,7 +12,7 @@ export default function Lease(){
     console.log("This is formData:",formData);
     const [post,setPost] = useState();
     console.log(post)
-    const url = "http://localhost:3001";
+    const url = "https://kejaapp-backend.onrender.com";
 
         useEffect(()=>{
         const findPost = async() =>{

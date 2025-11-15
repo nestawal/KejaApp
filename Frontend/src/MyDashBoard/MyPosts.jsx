@@ -8,7 +8,7 @@ export default function MyPosts(){
     const location = useLocation()
     const formData = location.state?.formData || {};
     console.log(formData)
-    const url = "http://localhost:3001"
+    const url = "https://kejaapp-backend.onrender.com"
     
     const cart = location.state?.cart || [];
 
@@ -78,7 +78,7 @@ export default function MyPosts(){
             <h1>Your posts</h1>
             <section className="cards-list">
                 {cards}
-                <button onClick={addPostForm}><img src="/src/images/plus.png" alt="add" /></button>
+                <button onClick={addPostForm}><img src="src/images/plus.png" alt="add" /></button>
             </section>
         </div>
     );

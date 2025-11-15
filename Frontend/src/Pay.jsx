@@ -10,7 +10,7 @@ export default function Pay(){
     const {amount} = useParams()
     console.log(`The property id is ${propertyId} and the personId is ${personId} for this amount ${amount}`);
    
-    const url = "http://localhost:3001";
+    const url = "https://kejaapp-backend.onrender.com";
 
  
     const [phone,setPhone] = useState('')

@@ -8,7 +8,7 @@ export default function PostInfo(){
     const {id} = useParams();
     const [post,setPost] = useState(null);
     
-    const url = "http://localhost:3001"
+    const url = "https://kejaapp-backend.onrender.com"
 
     useEffect(()=>{
         /*const foundPost = data.find(p=> p.id === Number(id));

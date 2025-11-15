@@ -6,7 +6,7 @@ import axios from "axios"
 export  default function Signup(){
 
   const navigate = useNavigate()
-  const url = "http://localhost:3001"
+  const url = "https://kejaapp-backend.onrender.com"
  
 const [formData,setFormData] = useState({
   name:"",

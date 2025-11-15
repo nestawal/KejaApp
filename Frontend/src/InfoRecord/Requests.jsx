@@ -3,7 +3,7 @@ import axios from "axios";
 
 //fix tomorrow trying to take pendingUsername to the acceptInfo function and patch in the database
 export default function Requests(props){
-    const url = "http://localhost:3001"
+    const url = "https://kejaapp-backend.onrender.com"
     const [info,setInfo] = useState(props.info)
     console.log(info[0].name)
     const postInfo = useState(props.postInfo)

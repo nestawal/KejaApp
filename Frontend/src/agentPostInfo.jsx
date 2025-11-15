@@ -16,7 +16,7 @@ export default function AgentPostInfo(){
     const [requestInfo,setRequestInfo] = useState([]);
     console.log(requestInfo);
     
-    const url = "http://localhost:3001"
+    const url = "https://kejaapp-backend.onrender.com"
 
     useEffect(()=>{
         const findPost = async() =>{

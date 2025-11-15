@@ -12,7 +12,7 @@ export default function App() {
     const location = useLocation();
     const formData = location.state?.user || location.state?.formData || {};
     console.log(formData)
-    const url = "http://localhost:3001"
+    const url = "https://kejaapp-backend.onrender.com"
 
 
     useEffect(()=>{

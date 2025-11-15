@@ -11,7 +11,7 @@ export default function MyRequests(){
     console.log(posts);
     console.log(formData)
     const id = formData._id
-    const url = "http://localhost:3001"
+    const url = "https://kejaapp-backend.onrender.com"
     
     const cart = location.state?.cart || [];
 

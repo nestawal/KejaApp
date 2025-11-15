@@ -16,6 +16,7 @@ export default function AddPost(){
     const formData = location.state || {};
     console.log(formData.formData.email)
     console.log(formData.formData)
+    const url = "https://kejaapp-backend.onrender.com"
    
     const [postForm,setPostForm] = useState({
        myFile: "",
@@ -56,7 +57,7 @@ export default function AddPost(){
       fd.append("rooms", postForm.rooms);
       fd.append("price", postForm.price);
       
-      const res = await axios.post("http://localhost:3001/Post/publish",fd,{
+      const res = await axios.post(`${url}/Post/publish`,fd,{
         headers:{
           'Content-Type': 'multipart/form-data'
         }
